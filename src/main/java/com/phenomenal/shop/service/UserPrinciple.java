@@ -1,16 +1,14 @@
-package com.smartmax.hrms.service;
+package com.phenomenal.shop.service;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-
-
+import com.phenomenal.shop.entity.Role;
+import com.phenomenal.shop.entity.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.smartmax.hrms.entity.Role;
-import com.smartmax.hrms.entity.User;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 public class UserPrinciple implements UserDetails {
 	private User user;

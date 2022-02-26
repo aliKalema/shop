@@ -15,7 +15,7 @@ import javax.persistence.Id;
 @NoArgsConstructor
 @ToString
 @Entity
-public class UserSettings {
+public class UserSetting {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;

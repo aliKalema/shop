@@ -1,2 +1,4 @@
-package com.phenomenal.shop.entity;public class UserImage {
+package com.phenomenal.shop.entity;
+
+public class UserImage {
 }

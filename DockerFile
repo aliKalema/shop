@@ -1,4 +1,4 @@
-FROM openjdk:8
-ADD target/shop-docker.jar shop-docker.jar
+FROM openjdk:17
+ADD target/app.jar app.jar
 EXPOSE 8080
-ENTRYPOINT ["java", "-jar" , "shop-docker.jar"]
+ENTRYPOINT ["java", "-jar" , "app.jar"]
