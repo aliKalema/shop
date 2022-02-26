@@ -1,0 +1,4 @@
+FROM openjdk:8
+ADD target/shop-docker.jar shop-docker.jar
+EXPOSE 8080
+ENTRYPOINT ["java", "-jar" , "shop-docker.jar"]
