@@ -1,4 +1,7 @@
 FROM openjdk:17
-ADD target/app.jar app.jar
+ARG APP_NAME="shop-service"
+ARG APP_VERSION="0.0.1"
+ARG JAR_FILE="/${APP_NAME}-${APP_VERSION}.jar"
+WORKDIR /shop
 EXPOSE 8080
-ENTRYPOINT ["java", "-jar" , "app.jar"]
+ENTRYPOINT ["java", "-jar" , "/app.jar"]

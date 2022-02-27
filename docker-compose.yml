@@ -28,5 +28,3 @@ services:
       dockerfile: "DockerFile"
     depends_on:
       - mysql-shop-db
-    volumes:
-      - .m2:/root/.m2
