@@ -10,7 +10,7 @@ services:
       - MYSQL_DATABASE=$MYSQLDB_DATABASE
     ports:
       - $MYSQLDB_LOCAL_PORT:$MYSQLDB_DOCKER_PORT
-  shop-docker-container:
+  shop-service:
     ports:
       - $SPRING_LOCAL_PORT:$SPRING_DOCKER_PORT
     env_file: ./.env
@@ -24,7 +24,6 @@ services:
            "spring.jpa.hibernate.ddl-auto" : "update"
          }'
     build:
-      context: "./"
-      dockerfile: "DockerFile"
+      context: .
     depends_on:
       - mysql-shop-db

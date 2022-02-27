@@ -1,7 +1,8 @@
 package com.phenomenal.shop.service;
 
-import com.smartmax.hrms.entity.User;
-import com.smartmax.hrms.repository.UserRepository;
+
+import com.phenomenal.shop.entity.User;
+import com.phenomenal.shop.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
