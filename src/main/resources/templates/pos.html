@@ -11,11 +11,13 @@
     POS
   </title>
   <!--     Fonts and icons     -->
-  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
+  <link rel="stylesheet" type="text/css" th:href="@{/css/ggle-fonts.css}" />
   <!-- Nucleo Icons -->
+  <link th:href="@{/css/nucleo-icons.css}" rel="stylesheet" />
   <script rel="stylesheet"  th:src="@{/webjars/font-awesome/5.15.3/js/all.js}"></script>
   <!-- Material Icons -->
-  <link rel="stylesheet" th:href="@{/webjars/material-design-icons/4.0.0/material-icons.css}">
+  <link rel="stylesheet" th:href="@{webjars/material-design-icons/4.0.0/material-icons.css}">
+  <link th:href="@{/css/material-icons-round.css}" rel="stylesheet">
   <!-- CSS Files -->
   <link id="pagestyle" th:href="@{/css/material-dashboard.min.css}" rel="stylesheet" />
   <link  th:href="@{/css/custom-material-dashboard.css}" rel="stylesheet" type="text/css"/>
@@ -72,14 +74,14 @@
         <hr class="horizontal light mt-0">
         <li class="nav-item">
           <a  class="nav-link text-white " th:href="@{/}" >
-            <i class="material-icons  opacity-10">dashboard</i>
+            <i class="material-icons-round opacity-10">dashboard</i>
             <span class="nav-link-text ms-2 ps-1">Dashboards</span>
           </a>
         </li>
 
         <li class="nav-item">
           <a  class="nav-link text-white" th:href="@{/}">
-            <i class="material-icons  {% if page.brand == 'RTL' %}ms-2{% else %} me-2{% endif %}">image</i>
+            <i class="material-icons-round {% if page.brand == 'RTL' %}ms-2{% else %} me-2{% endif %}">image</i>
             <span class="nav-link-text ms-2 ps-1">Pages</span>
           </a>
         </li>
