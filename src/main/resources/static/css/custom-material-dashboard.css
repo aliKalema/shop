@@ -1,0 +1,124 @@
+.main-right-bar-container{
+    display:flex;
+    height:100%;
+    padding:20px 0px;
+}
+.category-main-container{
+
+}
+.category-main-separator{
+    height:100%;
+    width:2px;
+    background: #3a416f;
+    margin: 0px 10px;
+}
+.side-bar-btn-container{
+    margin-top:20px;
+    background: #fff;
+    height:40px;
+    padding-top:13px;
+    padding-left:10px;
+    border:solid 1px #9d9fa6;
+    display:flex;
+    justify-content:center;
+    width:40px;
+    border-radius: 50%
+}
+.category-main-container{
+    width:60%;
+    min-height:100%;
+}
+.right-bar-container{
+    width:38%;
+    height: 100%;
+}
+.nav-tabs-grid{
+    display: flex;
+    flex-direction: column;
+}
+.nav-tabs-grid-content{
+    height: 100%;
+    overflow: hidden;
+}
+.my-tab-pane{
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+}
+.product-quantity-table{
+    margin-top:10px;
+    padding:0 10px;
+    height: 100%;
+    overflow: hidden;
+    background: #ffffff;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+.product-table{
+    height: 45%;
+    box-sizing: border-box;
+}
+.calculator-container{
+    width:100%;
+    padding-top:25px;
+    height:55%;
+    display:flex;
+    flex-direction: column;
+    position:absolute;
+    bottom:0;
+}
+.total-container{
+    border-top: 1px solid #3a416f;
+    width:80%;
+    margin: 0 auto;
+}
+.calculator-wrapper{
+    display: flex;
+    margin-top: 20px;
+}
+.num-input-container{
+    width:48%;
+    display:grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 2px;
+}
+.cal-num{
+    height:36px;
+    border-radius:5px;
+    border:solid 1px #f4f4f4;
+    background:#344767;
+    color:#f6f6f6;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    vertical-align: top;
+    padding: 0;
+}
+.total-paid-bal-container{
+    box-sizing: border-box;
+    padding:0 8px;
+    width:48%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.total-paid-container{
+    width:100%;
+    display:flex;
+    justify-content: space-between;
+}
+.sales-btn-group{
+    height:90%;
+    margin-top:5%;
+    display: grid;
+    grid-template-columns:1fr 1fr;
+    justify-content:center;
+}
+.nav-link-icon-label{
+    display:flex;
+    flex-direction: column;
+    height:60px;
+}
+#KioskBoard-VirtualKeyboard{
+}
