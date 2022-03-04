@@ -17,6 +17,7 @@
   <script rel="stylesheet"  th:src="@{/webjars/font-awesome/5.15.3/js/all.js}"></script>
   <!-- Material Icons -->
   <link rel="stylesheet" th:href="@{webjars/material-design-icons/4.0.0/material-icons.css}">
+  <link rel="stylesheet" th:href="@{webjars/bootstrap/5.1.1/css/bootstrap.css}">
   <link th:href="@{/css/material-icons-round.css}" rel="stylesheet">
   <!-- CSS Files -->
   <link id="pagestyle" th:href="@{/css/material-dashboard.min.css}" rel="stylesheet" />
@@ -533,7 +534,8 @@
 </body>
   <!--   Core JS Files   -->
   <script th:src="@{/js/core/popper.min.js}"></script>
-  <script th:src="@{/js/core/bootstrap.min.js}"></script>
+  <script th:src="@{webjars/bootstrap/5.1.1/js/bootstrap.js}"></script>
+  <script th:src="@{webjars/jquery/3.6.0/jquery.js}"></script>
   <script th:src="@{/js/plugins/perfect-scrollbar.min.js}"></script>
   <script th:src="@{/js/plugins/smooth-scrollbar.min.js}"></script>
   <script th:src="@{/js/plugins/choices.min.js}"></script>
@@ -593,6 +595,7 @@
     }
   </script>
   <!-- Kanban scripts -->
+
   <script th:src="@{/js/plugins/dragula/dragula.min.js}"></script>
   <script th:src="@{/js/plugins/jkanban/jkanban.js}"></script>
   <script>

@@ -93,6 +93,79 @@
 			<artifactId>bootstrap-material-design</artifactId>
 			<version>4.1.1</version>
 		</dependency>
+		<dependency>
+			<groupId>org.webjars.npm</groupId>
+			<artifactId>countup.js</artifactId>
+			<version>2.0.8</version>
+		</dependency>
+		<dependency>
+			<groupId>org.webjars.npm</groupId>
+			<artifactId>dragula</artifactId>
+			<version>3.7.3</version>
+		</dependency>
+		<dependency>
+			<groupId>org.webjars.bower</groupId>
+			<artifactId>perfect-scrollbar</artifactId>
+			<version>0.8.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.webjars.npm</groupId>
+			<artifactId>popper.js</artifactId>
+			<version>1.16.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>chartjs</artifactId>
+			<version>3.7.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.webjars.npm</groupId>
+			<artifactId>choices.js</artifactId>
+			<version>9.0.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>datatables</artifactId>
+			<version>1.11.4</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.webjars.npm/dropzone -->
+		<dependency>
+			<groupId>org.webjars.npm</groupId>
+			<artifactId>dropzone</artifactId>
+			<version>5.9.3</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.webjars.npm/flatpickr -->
+		<dependency>
+			<groupId>org.webjars.npm</groupId>
+			<artifactId>flatpickr</artifactId>
+			<version>4.6.9</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.webjars.npm/fullcalendar -->
+		<dependency>
+			<groupId>org.webjars.npm</groupId>
+			<artifactId>fullcalendar</artifactId>
+			<version>5.10.2</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.webjars.npm/leaflet -->
+		<dependency>
+			<groupId>org.webjars.npm</groupId>
+			<artifactId>leaflet</artifactId>
+			<version>1.7.1</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.webjars.npm/nouislider -->
+		<dependency>
+			<groupId>org.webjars.npm</groupId>
+			<artifactId>nouislider</artifactId>
+			<version>15.5.0</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-collections4 -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-collections4</artifactId>
+			<version>4.4</version>
+		</dependency>
+
+
 	</dependencies>
 
 	<build>

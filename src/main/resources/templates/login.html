@@ -1,46 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
-
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="apple-touch-icon" sizes="76x76" href="../../../assets/img/apple-icon.png">
-  <link rel="icon" type="image/png" href="../../../assets/img/favicon.png">
-  <title>
-    Material Dashboard 2 PRO by Creative Tim
-  </title>
-  <!-- Extra details for Live View on GitHub Pages -->
-  <!--  Social tags      -->
-  <meta name="keywords" content="creative tim, html dashboard, html css dashboard, web dashboard, bootstrap 5 dashboard, bootstrap 5, css3 dashboard, bootstrap 5 admin, material dashboard bootstrap 5 dashboard, frontend, responsive bootstrap 5 dashboard, material design, material dashboard bootstrap 5 dashboard">
-  <meta name="description" content="Material Dashboard PRO is a beautiful Bootstrap 5 admin dashboard with a large number of components, designed to look beautiful, clean and organized. If you are looking for a tool to manage dates about your business, this dashboard is the thing for you.">
-  <!-- Twitter Card data -->
-  <meta name="twitter:card" content="product">
-  <meta name="twitter:site" content="@creativetim">
-  <meta name="twitter:title" content="Material Dashboard PRO by Creative Tim">
-  <meta name="twitter:description" content="Material Dashboard PRO is a beautiful Bootstrap 5 admin dashboard with a large number of components, designed to look beautiful, clean and organized. If you are looking for a tool to manage dates about your business, this dashboard is the thing for you.">
-  <meta name="twitter:creator" content="@creativetim">
-  <meta name="twitter:image" content="https://s3.amazonaws.com/creativetim_bucket/products/51/original/opt_mdp_bs5_thumbnail.jpg">
-  <!-- Open Graph data -->
-  <meta property="fb:app_id" content="655968634437471">
-  <meta property="og:title" content="Material Dashboard PRO by Creative Tim" />
-  <meta property="og:type" content="article" />
-  <meta property="og:url" content="https://demos.creative-tim.com/material-dashboard-pro/pages/dashboards/default.html" />
-  <meta property="og:image" content="https://s3.amazonaws.com/creativetim_bucket/products/51/original/opt_mdp_bs5_thumbnail.jpg" />
-  <meta property="og:description" content="Material Dashboard PRO is a beautiful Bootstrap 5 admin dashboard with a large number of components, designed to look beautiful, clean and organized. If you are looking for a tool to manage dates about your business, this dashboard is the thing for you." />
-  <meta property="og:site_name" content="Creative Tim" />
-  <!--     Fonts and icons     -->
-  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
-  <!-- Nucleo Icons -->
-  <link th:href="@{/assets/css/nucleo-icons.css}" rel="stylesheet" />
-  <link th:href="@{/assets/css/nucleo-svg.css}" rel="stylesheet" />
-  <!-- Font Awesome Icons -->
-  <script th:src="@{https://kit.fontawesome.com/42d5adcbca.js}" crossorigin="anonymous"></script>
-  <!-- Material Icons -->
-  <link th:href="@{https://fonts.googleapis.com/icon?family=Material+Icons+Round}" rel="stylesheet">
-  <!-- CSS Files -->
-  <link id="pagestyle" th:href="@{/assets/css/material-dashboard.min.css?v=3.0.2}" rel="stylesheet" />
+  <link rel="apple-touch-icon" sizes="76x76" th:href="@{/img/apple-icon.png}">
+  <link rel="icon" type="image/png" th:href="@{/img/favicon.png}">
+  <title>LOGIN</title>
+  <link rel="stylesheet" type="text/css" th:href="@{/css/ggle-fonts.css}" />
+  <link th:href="@{/css/nucleo-icons.css}" rel="stylesheet" />
+  <link rel="stylesheet"  th:href="@{webjars/font-awesome/5.15.3/css/all.css}"/>
+  <script  th:src="@{webjars/font-awesome/5.15.3/js/all.js}"></script>
+  <link rel="stylesheet" th:href="@{webjars/bootstrap/5.1.1/css/bootstrap.css}">
+  <link rel="stylesheet" th:href="@{webjars/material-design-icons/4.0.0/material-icons.css}">
+  <link th:href="@{/css/material-icons-round.css}" rel="stylesheet">
+  <link id="pagestyle" th:href="@{/css/material-dashboard.min.css}" rel="stylesheet" />
+  <link  th:href="@{/css/custom-material-dashboard.css}" rel="stylesheet" type="text/css"/>
+  <link  th:href="@{/css/keyboard.css}" rel="stylesheet" />
   <!-- Anti-flicker snippet (recommended)  -->
   <style>
+    html,
+    body {
+      height: 100%;
+    }
     .async-hide {
       opacity: 0 !important
     }
@@ -81,21 +62,17 @@
               </div>
             </div>
             <div class="card-body">
-              <form role="form" class="text-start">
+              <form role="form" id="login-form" class="text-start form">
                 <div class="input-group input-group-outline my-3">
                   <label class="form-label">Username</label>
-                  <input type="email" class="form-control">
+                  <input type="text" id="username" name="username" class="form-control" required>
                 </div>
-                <div class="input-group input-group-outline mb-3">
+                <div class="input-group input-group-outline my-3">
                   <label class="form-label">Password</label>
-                  <input type="password" class="form-control">
-                </div>
-                <div class="form-check form-switch d-flex align-items-center mb-3">
-                  <input class="form-check-input" type="checkbox" id="rememberMe">
-                  <label class="form-check-label mb-0 ms-2" for="rememberMe">Remember me</label>
+                  <input type="password" id="password" name="password" class="form-control" required>
                 </div>
                 <div class="text-center">
-                  <button type="button" class="btn bg-gradient-primary w-100 my-4 mb-2">Sign in</button>
+                  <input type="submit" value="Submit" class="btn bg-gradient-primary w-100 my-4 mb-2">
                 </div>
               </form>
             </div>
@@ -106,17 +83,51 @@
   </div>
 </main>
 <!--   Core JS Files   -->
-<script th:src="@{/assets/js/core/popper.min.js}"></script>
-<script th:src="@{/assets/js/core/bootstrap.min.js}"></script>
-<script th:src="@{/assets/js/plugins/perfect-scrollbar.min.js}"></script>
-<script th:src="@{/assets/js/plugins/smooth-scrollbar.min.js}"></script>
-<!-- Kanban scripts -->
-<script th:src="@{/assets/js/plugins/dragula/dragula.min.js}"></script>
-<script th:src="@{/assets/js/plugins/jkanban/jkanban.js}"></script>
+<script th:src="@{webjars/jquery/3.6.0/jquery.js}"></script>
+<script th:src="@{webjars/bootstrap/5.1.1/js/bootstrap.js}"></script>
+<script th:src="@{/js/core/popper.min.js}"></script>
+<script th:src="@{/js/plugins/perfect-scrollbar.min.js}"></script>
+<script th:src="@{/js/plugins/smooth-scrollbar.min.js}"></script>
+<script th:src="@{/js/plugins/choices.min.js}"></script>
+<script th:src="@{/js/plugins/dropzone.min.js}"></script>
+<script th:src="@{/js/plugins/quill.min.js}"></script>
 <!-- Github buttons -->
 <!--<script async defer src="https://buttons.github.io/buttons.js"></script>-->
 <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
-<script th:src="@{/assets/js/material-dashboard.js?v=3.0.2}"></script>
+<script th:src="@{/js/material-dashboard.min.js}"></script>
+<script th:src="@{/js/plugins/notify.min.js}"></script>
+<script>
+  var win = navigator.platform.indexOf('Win') > -1;
+  if (win && document.querySelector('#sidenav-scrollbar')) {
+  var options = {
+  damping: '0.5'
+  }
+  Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+  }
+</script>
+<script>
+  document.getElementById('login-form').addEventListener('submit',login);
+  function login(e){
+    e.preventDefault();
+    const form = document.getElementById('login-form');
+    const formData = new FormData(form);
+    fetch('/login',{
+      method:'POST',
+      body:formData,
+      redirect: "follow"
+    }).then(function(res){
+      if(!res.ok){
+        $.notify("Wrong Username or Password","error");
+        form.reset();
+        throw new Error('Something Went Wrong');
+      }
+      else{
+        window.location.href= res.url;
+      }
+    })
+
+  }
+</script>
 </body>
 
 </html>
