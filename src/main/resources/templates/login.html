@@ -82,7 +82,35 @@
     </div>
   </div>
 </main>
-<!--   Core JS Files   -->
+<div class="position-fixed bottom-1 end-1 z-index-2">
+  <div class="toast fade hide p-2 mt-2 bg-gradient-success" role="alert" aria-live="assertive" id="successToast" aria-atomic="true">
+    <div class="toast-header bg-transparent border-0">
+      <i class="material-icons text-white me-2">
+        check_circle
+      </i>
+      <span class="me-auto text-white font-weight-bold">Success</span>
+      <i class="fas fa-times text-md text-white ms-3 cursor-pointer" data-bs-dismiss="toast" aria-label="Close"></i>
+    </div>
+    <hr class="horizontal light m-0">
+    <div class="toast-body text-white" id="success-toast-message">
+
+    </div>
+  </div>
+  <div class="toast fade hide p-2 mt-2 bg-gradient-danger" role="alert" aria-live="assertive" id="errorToast" aria-atomic="true">
+    <div class="toast-header bg-transparent border-0">
+      <i class="material-icons text-white me-2">
+        error
+      </i>
+      <span class="me-auto text-white font-weight-bold">Error</span>
+
+      <i class="fas fa-times text-md text-white ms-3 cursor-pointer" data-bs-dismiss="toast" aria-label="Close"></i>
+    </div>
+    <hr class="horizontal light m-0">
+    <div class="toast-body text-white" id="error-toast-message">
+
+    </div>
+  </div>
+</div>
 <script th:src="@{webjars/jquery/3.6.0/jquery.js}"></script>
 <script th:src="@{webjars/bootstrap/5.1.1/js/bootstrap.js}"></script>
 <script th:src="@{/js/core/popper.min.js}"></script>
@@ -91,11 +119,7 @@
 <script th:src="@{/js/plugins/choices.min.js}"></script>
 <script th:src="@{/js/plugins/dropzone.min.js}"></script>
 <script th:src="@{/js/plugins/quill.min.js}"></script>
-<!-- Github buttons -->
-<!--<script async defer src="https://buttons.github.io/buttons.js"></script>-->
-<!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
 <script th:src="@{/js/material-dashboard.min.js}"></script>
-<script th:src="@{/js/plugins/notify.min.js}"></script>
 <script>
   var win = navigator.platform.indexOf('Win') > -1;
   if (win && document.querySelector('#sidenav-scrollbar')) {
@@ -117,7 +141,7 @@
       redirect: "follow"
     }).then(function(res){
       if(!res.ok){
-        $.notify("Wrong Username or Password","error");
+        errorNotify("Wrong Username or Password");
         form.reset();
         throw new Error('Something Went Wrong');
       }
@@ -126,6 +150,10 @@
       }
     })
 
+  }
+  function errorNotify(message){
+    document.getElementById('error-toast-message').innerText = message;
+    $('#errorToast').toast('show');
   }
 </script>
 </body>

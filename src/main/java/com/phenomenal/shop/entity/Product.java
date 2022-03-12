@@ -1,6 +1,5 @@
 package com.phenomenal.shop.entity;
 
-import com.phenomenal.shop.entity.ProductImage;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,9 +19,13 @@ public class Product {
     private String name;
     private double price;
     private int quantity;
-    private String barCodeReference;
+    private String barCodeSerial;
     private String barCodeName;
+    private String description;
+    private int minQuantity;
     @OneToMany(cascade= CascadeType.ALL,fetch= FetchType.EAGER)
     @JoinColumn(name="product_id")
     private Set<ProductImage> productImages;
+    @Transient
+    private Set<ProductImage> mainImages;
 }

@@ -26,6 +26,12 @@ public class User {
     @OneToMany(cascade= CascadeType.ALL,fetch= FetchType.EAGER)
     @JoinColumn(name="user_id")
     private List<Role> roles;
+    @OneToOne(cascade= CascadeType.ALL,fetch= FetchType.EAGER)
+    @JoinColumn(name="user_setting_id")
+    private UserSetting userSetting;
+    @OneToOne(cascade= CascadeType.ALL,fetch= FetchType.EAGER)
+    @JoinColumn(name="user_image_id")
+    private UserImage userImage;
     @Transient
     private boolean online;
 

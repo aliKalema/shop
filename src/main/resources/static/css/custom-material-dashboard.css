@@ -120,5 +120,43 @@
     flex-direction: column;
     height:60px;
 }
-#KioskBoard-VirtualKeyboard{
+.mycheckbox{
+    display: inline-flex;
+    align-items:center;
+    cursor:pointer;
+}
+.mycheckbox_input {
+    display:none;
+}
+.mycheckbox_box{
+    width:1.8em;
+    height:1.8em;
+    border:2px solid #cccccc;
+    border-radius: 3px;
+    display:flex;
+    justify-content: center;
+    margin-right:10px;
+    flex-shrink:0;
+    transition: background 0.15s, border-color 0.15s;
+}
+.mycheckbox_box::after{
+    content:'\2714';
+    color:#ffffff;
+    transform: scale(0);
+}
+.mycheckbox_input:checked + .mycheckbox_box{
+    background: #ec407a;
+    border-color:#ec407a;
+}
+.mycheckbox_input:checked + .mycheckbox_box::after{
+    transform: scale(1);
+}
+.dz-error-mark{
+    display:none;
+}
+.dz-success-mark{
+    display:none;
+}
+.dz-details{
+    width:50%;
 }

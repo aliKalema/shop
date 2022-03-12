@@ -1,6 +1,5 @@
 package com.phenomenal.shop.security;
 
-import com.phenomenal.shop.service.UserPrincipleService;
 import org.springframework.boot.web.servlet.ServletListenerRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

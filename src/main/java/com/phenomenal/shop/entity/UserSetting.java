@@ -19,4 +19,6 @@ public class UserSetting {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    private boolean touchScreen;
+    private boolean darkMode;
 }
