@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 public class BarcodeService {
     @Autowired
     ProductRepository productRepository;
-    public void generateBarcode(){
-
+    public String generateBarcode(String barcode){
+        return null;
     }
 }

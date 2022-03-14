@@ -478,6 +478,16 @@
   <script th:src="@{/js/plugins/keyboard.js}"></script>
 <script th:src="@{/js/plugins/chartjs.min.js}"></script>
   <script>
+  function successNotify(message){
+    document.getElementById('success-toast-message').innerText = message;
+    $('#successToast').toast('show');
+  }
+  function errorNotify(message){
+    document.getElementById('error-toast-message').innerText = message;
+    $('#errorToast').toast('show');
+  }
+</script>
+  <script>
     if (document.getElementById('products-list')) {
       const dataTableSearch = new simpleDatatables.DataTable("#products-list", {
         searchable: true,
@@ -612,14 +622,6 @@
     }).then(function(category){
       successNotify("Category Added")
     });
-  }
-  function successNotify(message){
-    document.getElementById('success-toast-message').innerText = message;
-    $('#successToast').toast('show');
-  }
-  function errorNotify(message){
-    document.getElementById('error-toast-message').innerText = message;
-    $('#errorToast').toast('show');
   }
 </script>
 </body>

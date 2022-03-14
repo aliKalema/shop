@@ -1,6 +1,6 @@
 package com.phenomenal.shop.controller;
 
-import com.phenomenal.shop.service.ProductCategoryService;
+import com.phenomenal.shop.service.ProductService;
 import com.phenomenal.shop.service.UserService;
 import com.phenomenal.shop.utils.SystemUtils;
 import org.springframework.security.core.Authentication;
@@ -10,7 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 @RestController
 public record PageController(UserService userSettingsService,
-                             ProductCategoryService productCategoryService) {
+                             ProductService productService) {
     @GetMapping("/login")
     public ModelAndView loginPage(){
         ModelAndView mav =  SystemUtils.createMav("login");
@@ -20,21 +20,21 @@ public record PageController(UserService userSettingsService,
     public ModelAndView homePage(Authentication authentication){
         ModelAndView mav =  SystemUtils.createMav("pos");
         mav.addObject("user",userSettingsService.getUserSettings(authentication));
-        mav.addObject("productCategories",productCategoryService.getAllProductCategories());
+        mav.addObject("productCategories",productService.getAllProductCategories());
         return mav;
     }
     @GetMapping("/admin/product")
     public ModelAndView productsPage(Authentication authentication){
         ModelAndView mav =  SystemUtils.createMav("products");
         mav.addObject("user",userSettingsService.getUserSettings(authentication));
-        mav.addObject("categories",productCategoryService.getAllProductCategories());
+        mav.addObject("categories",productService.getAllProductCategories());
         return mav;
     }
     @GetMapping("/admin/product/new")
     public ModelAndView newProductsPage(Authentication authentication){
         ModelAndView mav =  SystemUtils.createMav("new-product");
         mav.addObject("user",userSettingsService.getUserSettings(authentication));
-        mav.addObject("categories",productCategoryService.getAllProductCategories());
+        mav.addObject("categories",productService.getAllProductCategories());
         return mav;
     }
 }

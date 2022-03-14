@@ -4,5 +4,15 @@
       "name": "uploads.upload-directory",
       "type": "java.lang.String",
       "description": "Description for uploads.upload-directory."
-  }
-] }
+    },
+    {
+      "name": "productuploads.upload-directory",
+      "type": "java.lang.String",
+      "description": "Description for productuploads.upload-directory."
+    },
+    {
+      "name": "useruploads.upload-directory",
+      "type": "java.lang.String",
+      "description": "Description for useruploads.upload-directory."
+    }
+  ] }

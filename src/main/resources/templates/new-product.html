@@ -406,6 +406,35 @@
       </div>
     </div>
   </div>
+<div class="position-fixed bottom-1 end-1 z-index-2">
+  <div class="toast fade hide p-2 mt-2 bg-gradient-success" role="alert" aria-live="assertive" id="successToast" aria-atomic="true">
+    <div class="toast-header bg-transparent border-0">
+      <i class="material-icons text-white me-2">
+        check_circle
+      </i>
+      <span class="me-auto text-white font-weight-bold">Success</span>
+      <i class="fas fa-times text-md text-white ms-3 cursor-pointer" data-bs-dismiss="toast" aria-label="Close"></i>
+    </div>
+    <hr class="horizontal light m-0">
+    <div class="toast-body text-white" id="success-toast-message">
+
+    </div>
+  </div>
+  <div class="toast fade hide p-2 mt-2 bg-gradient-danger" role="alert" aria-live="assertive" id="errorToast" aria-atomic="true">
+    <div class="toast-header bg-transparent border-0">
+      <i class="material-icons text-white me-2">
+        error
+      </i>
+      <span class="me-auto text-white font-weight-bold">Error</span>
+
+      <i class="fas fa-times text-md text-white ms-3 cursor-pointer" data-bs-dismiss="toast" aria-label="Close"></i>
+    </div>
+    <hr class="horizontal light m-0">
+    <div class="toast-body text-white" id="error-toast-message">
+
+    </div>
+  </div>
+</div>
   <!--   Core JS Files   -->
   <script th:src="@{/js/core/popper.min.js}"></script>
   <script th:src="@{/webjars/bootstrap/5.1.1/js/bootstrap.js}"></script>
@@ -429,6 +458,16 @@
       Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
     }
     </script>
+  <script>
+  function successNotify(message){
+    document.getElementById('success-toast-message').innerText = message;
+    $('#successToast').toast('show');
+  }
+  function errorNotify(message){
+    document.getElementById('error-toast-message').innerText = message;
+    $('#errorToast').toast('show');
+  }
+</script>
   <script th:inline="javascript">
     var categories = [[${categories}]];
   </script>
@@ -470,22 +509,35 @@
       const description = document.getElementById('description');
       const barcodeNumber =  document.getElementById('barcode-number');
       const autoGenerateBarCode = document.getElementById('auto-generate-barcode');
-      let mainFile = document.getElementById('mainImg').files;
-      let additionalFiles =document.getElementById('additionalImgs').files;
+      const mainImg = Dropzone.forElement("#mainImg").files[0];
+      const additionalImgs = Dropzone.forElement("#additionalImgs").files;
       const formData = new FormData();
       formData.append("name",name.value);
       formData.append("price",price.value);
       formData.append("quantity",quantity.value);
-      formData.append("min-quantity",minQuantity.value);
-      formData.append("category",category.value);
+      formData.append("minQuantity",minQuantity.value);
+      formData.append("categoryId",category.value);
       formData.append("description",description.value);
       if(autoGenerateBarCode.checked){
-        formData.append("barcode-number","");
+        formData.append("generate",true);
+        formData.append("barcode","");
       }
       else{
-        formData.append("barcode-number",barcodeNumber.value);
+        formData.append("generate",false);
+        formData.append("barcode",barcodeNumber.value);
       }
-      const mainImg = Dropzone.forElement("#mainImg").files[0];
+      formData.append("mainImg",mainImg);
+      formData.append("additionalImgs",additionalImgs);
+      fetch("",{
+        method:'POST',
+        body:formData
+      }).then(function(res){
+        if(!res.ok){
+          errorNotify("Something Went Wrong");
+          throw new Error(res.statusText);
+        }
+        window.location.href="/admin/product";
+      })
     }
     function addOption(optionValue) {
       const option = document.createElement("option");
