@@ -23,4 +23,7 @@ public class ProductImage {
     private long size =0;
     @Column(columnDefinition = "boolean default false")
     private boolean main;
+    public ProductImage(String name){
+        this.name =  name;
+    }
 }

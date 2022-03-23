@@ -20,7 +20,8 @@ public class ProductCategory {
     @OneToMany(cascade= CascadeType.ALL,fetch= FetchType.EAGER)
     @JoinColumn(name="product_category_id")
     private Set<Product>products;
-
+    @Transient private double total;
+    @Transient private int quantity;
     public void addProduct(Product product) {
         this.products.add(product);
     }

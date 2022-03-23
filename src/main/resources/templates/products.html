@@ -320,28 +320,20 @@
             </div>
             <div class="card-body">
               <ul class="list-group">
-                <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
+                <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg" th:each="category :${categories}">
                   <div class="d-flex align-items-center">
-                    <button class="btn btn-icon-only btn-rounded btn-outline-success mb-0 me-3 p-3 btn-sm d-flex align-items-center justify-content-center"><i class="material-icons text-lg">expand_less</i></button>
+                    <div class="panel-heading" role="tab">
+                      <button  class="btn btn-icon-only btn-rounded btn-outline-success mb-0 me-3 p-3 btn-sm d-flex align-items-center justify-content-center">
+                        <i class="material-icons text-lg">expand_more</i>
+                      </button>
+                    </div>
                     <div class="d-flex flex-column">
-                      <h6 class="mb-1 text-dark text-sm">HubSpot</h6>
-                      <span class="text-xs">Quantity: &nbsp;<i>1200</i></span>
+                      <h6 class="mb-1 text-dark text-sm" th:text="${category.name}"></h6>
+                      <span class="text-xs">Quantity: &nbsp;<i th:text="${category.quantity}"></i></span>
                     </div>
                   </div>
                   <div class="d-flex align-items-center text-success text-gradient text-sm font-weight-bold">
-                    + $ 1,000
-                  </div>
-                </li>
-                <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
-                  <div class="d-flex align-items-center">
-                    <button class="btn btn-icon-only btn-rounded btn-outline-success mb-0 me-3 p-3 btn-sm d-flex align-items-center justify-content-center"><i class="material-icons text-lg">expand_less</i></button>
-                    <div class="d-flex flex-column">
-                      <h6 class="mb-1 text-dark text-sm">Creative Tim</h6>
-                      <span class="text-xs">26 March 2020, at 08:30 AM</span>
-                    </div>
-                  </div>
-                  <div class="d-flex align-items-center text-success text-gradient text-sm font-weight-bold">
-                    + $ 2,500
+                    <span th:text="${category.total}"></span>
                   </div>
                 </li>
               </ul>
@@ -471,8 +463,6 @@
   <script th:src="@{/js/plugins/perfect-scrollbar.min.js}"></script>
   <script th:src="@{/js/plugins/smooth-scrollbar.min.js}"></script>
   <script th:src="@{/js/plugins/choices.min.js}"></script>
-  <script th:src="@{/js/plugins/dropzone.min.js}"></script>
-  <script th:src="@{/js/plugins/quill.min.js}"></script>
   <script th:src="@{/js/plugins/datatables.js}"></script>
   <script th:src="@{/js/material-dashboard.min.js}"></script>
   <script th:src="@{/js/plugins/keyboard.js}"></script>
@@ -525,9 +515,12 @@
       Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
     }
   </script>
+<script th:inline="javascript">
+  var categories = [[${categories}]];
+  var products = [[${products}]];
+</script>
   <script>
     var ctx4 = document.getElementById("pie-chart").getContext("2d");
-
     new Chart(ctx4, {
       type: "pie",
       data: {
@@ -584,24 +577,11 @@
     });
   </script>
 <script>
-  document.getElementById('add-product-form').addEventListener('submit',addProduct);
-  document.getElementById('add-category-form').addEventListener('submit',addCategory)
-  function addProduct(e){
-    e.preventDefault();
-    const formData =  new FormData();
-    fetch('/api/v1/admin/products',{
-      method:'POST',
-      body:formData
-    }).then(function (res){
-      if(!res.ok){
-        throw new Error(res.statusText)
-      }
-      return res.json();
-    })
-    .then(function(product){
+  $(document).ready(function() {
 
-    });
-  }
+  });
+  document.getElementById('add-category-form').addEventListener('submit',addCategory)
+
   function addCategory(e){
     e.preventDefault();
     $('#add-Category-modal').modal('hide');
@@ -622,6 +602,23 @@
     }).then(function(category){
       successNotify("Category Added")
     });
+  }
+
+  function rotate(element){
+    if (element.dataset.expand == "1"){
+      element.children[0].style.display = "none";
+      element.children[1].style.display = "block";
+      element.dataset.expand = "0";
+    }
+    else if (element.dataset.expand == "0"){
+      element.children[0].style.display = "block";
+      element.children[1].style.display = "none";
+      element.dataset.expand = "1";
+    }
+  }
+
+  function generateRandomColor(){
+    return "#"+(Math.floor(Math.random()*16777215).toString(16)).toString();
   }
 </script>
 </body>

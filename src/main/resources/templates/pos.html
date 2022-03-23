@@ -324,7 +324,7 @@
                     </div>
                   </div>
                   <div  style="padding-top:7px;display:flex;justify-content: space-between;width:96%;">
-                      <div><button type="button" class="btn btn-secondary">Print</button></div>
+                      <div><button type="button" onclick="gth()" class="btn btn-secondary">Print</button></div>
                       <div><button type="button" class="btn btn-success">Onhold</button></div>
                       <div><button type="button" class="btn btn-warning">Discount</button></div>
                       <div><button type="button" class="btn btn-danger">Cancel</button></div>
@@ -478,6 +478,7 @@
 
   <script th:src="@{/js/plugins/dragula/dragula.min.js}"></script>
   <script th:src="@{/js/plugins/jkanban/jkanban.js}"></script>
+  <script th:src="@{/js/plugins/sweetalert.min.js}"></script>
   <script>
     var win = navigator.platform.indexOf('Win') > -1;
     if (win && document.querySelector('#sidenav-scrollbar')) {
@@ -496,6 +497,24 @@
     document.getElementById('navbarMinimize').click();
    function closeKeyBoard(){
        document.getElementsByClassName('keyboard')[0].classList.add("keyboard--hidden");
+   }
+   function gth(){
+     Swal.fire({
+       title: 'Success!',
+       icon:'Product Added Successfully',
+       text: 'Template Cleared',
+       type: 'success',
+       timer: 1500,
+       confirmButtonClass: "btn btn-success",
+       buttonsStyling: false
+     }).catch(swal.noop)
+     // Swal.fire({
+     //   title: "Good job!",
+     //   text: "Template Added Succesfully!",
+     //   buttonsStyling: false,
+     //   confirmButtonClass: "btn btn-success",
+     //   type: "success"
+     // }).catch(swal.noop)
    }
   </script>
 </html>

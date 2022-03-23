@@ -27,6 +27,7 @@ public record PageController(UserService userSettingsService,
     public ModelAndView productsPage(Authentication authentication){
         ModelAndView mav =  SystemUtils.createMav("products");
         mav.addObject("user",userSettingsService.getUserSettings(authentication));
+        mav.addObject("products",productService.getAllProducts());
         mav.addObject("categories",productService.getAllProductCategories());
         return mav;
     }

@@ -8,6 +8,8 @@ import com.phenomenal.shop.repository.ProductRepository;
 import com.phenomenal.shop.service.BarcodeService;
 import com.phenomenal.shop.service.ProductService;
 import com.phenomenal.shop.utils.SystemUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,11 +23,6 @@ public record ProductController(ProductService productService,
                                 BarcodeService barcodeService,
                                 ProductRepository productRepository,
                                 ProductCategoryRepository productCategoryRepository) {
-    @PostMapping("/api/v1/admin/products")
-    public Product addProduct(){
-        return null;
-    }
-
     @PostMapping("/api/v1/admin/categories")
     public ResponseEntity<ProductCategory> addCategory(@RequestParam("name")String name){
         return productService.addProductCategory(name);
@@ -36,7 +33,7 @@ public record ProductController(ProductService productService,
         return productService.addProductToProductCategory(categoryId,productId);
     }
 
-    @GetMapping("api/v1/admin/products")
+    @PostMapping("/api/v1/admin/products")
     public ResponseEntity<Product> addProduct(@RequestParam("name")String name,
                                               @RequestParam("price")String price,
                                               @RequestParam("quantity")String quantity,
@@ -45,8 +42,8 @@ public record ProductController(ProductService productService,
                                               @RequestParam("generate")boolean generate,
                                               @RequestParam("barcode")String barcode,
                                               @RequestParam("categoryId")int categoryId,
-                                              @RequestParam("mainImg") MultipartFile mainImage,
-                                              @RequestParam("additionalImgs")MultipartFile[] additionalImages) throws NoSuchAlgorithmException {
+                                              @RequestParam("mainImgName") String  mainImageName,
+                                              @RequestParam("files")MultipartFile[] files) throws NoSuchAlgorithmException {
         Optional<ProductCategory> category = productCategoryRepository.findById(categoryId);
         if(category.isEmpty()){
             return new ResponseEntity(null, HttpStatus.NOT_FOUND);
@@ -60,7 +57,6 @@ public record ProductController(ProductService productService,
         Set<ProductImage> productImageList = new HashSet<>();
         if(generate){
             String generatedBarcodeSerial = SystemUtils.generateRandomNumbers(12);
-            barcodeService.generateBarcode(generatedBarcodeSerial);
             product.setBarCodeSerial(generatedBarcodeSerial);
         }
         else {
@@ -68,24 +64,28 @@ public record ProductController(ProductService productService,
             if(productExist.isPresent()){
                 return new ResponseEntity(productExist.get(),HttpStatus.CONFLICT);
             }
-            barcodeService.generateBarcode(barcode);
             product.setBarCodeSerial(barcode);
         }
-        if(mainImage != null) {
-            ProductImage mainProductImage = productService.createImage(mainImage);
-            mainProductImage.setMain(true);
-            productImageList.add(mainProductImage);
-        }
-        if(additionalImages.length>0) {
-            for(MultipartFile multipartFile : additionalImages){
-                ProductImage productImage = productService.createImage(multipartFile);
-                productImageList.add(productImage);
+        if(files.length>0) {
+            for(MultipartFile multipartFile :files){
+                System.out.println(multipartFile.getName());
+                if(multipartFile.getName().equals(mainImageName)){
+                    ProductImage mainProductImage = productService.createImage(multipartFile);
+                    mainProductImage.setMain(true);
+                    productImageList.add(mainProductImage);
+                }
+                else{
+                    ProductImage productImage = productService.createImage(multipartFile);
+                    productImageList.add(productImage);
+                }
             }
         }
         if(productImageList.size()>0){
             product.setProductImages(productImageList);
         }
-
+        category.get().addProduct(product);
+        productRepository.save(product);
+        productCategoryRepository.save(category.get());
         return new ResponseEntity<>(product,HttpStatus.OK);
     }
 }

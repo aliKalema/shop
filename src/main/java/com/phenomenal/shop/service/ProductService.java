@@ -31,12 +31,14 @@ public class ProductService {
     public List<Product> getAllProducts(){
         List<Product>products = new ArrayList<>();
         productRepository.findAll().forEach(products::add);
+        products.forEach(this:: setProductStructure);
         return products;
     }
 
     public List<ProductCategory> getAllProductCategories(){
         List<ProductCategory>categories = new ArrayList<>();
         productCategoryRepository.findAll().forEach(categories::add);
+        categories.forEach(this::setProductCategoryStructure);
         return categories;
     }
 
@@ -67,4 +69,48 @@ public class ProductService {
         return productImage;
     }
 
+    public void setProductCategoryStructure(ProductCategory productCategory){
+        double total= 0;
+        int quantity = 0;
+        for(Product product :productCategory.getProducts()){
+            total =total +  (product.getQuantity() * product.getPrice());
+            quantity = quantity + product.getQuantity();
+        }
+        productCategory.setQuantity(quantity);
+        productCategory.setTotal(total);
+    }
+
+    public void setProductStructure(Product product){
+        String status = "";
+        ProductImage mainImage = null;
+        List<ProductImage>additionalImages = new ArrayList<>();
+        if(product.getQuantity()>product.getMinQuantity()){
+            status = "IN STOCK";
+        }
+        else if(product.getQuantity()<=product.getMinQuantity() & product.getQuantity()>0){
+            status = "BELOW MINIMUM";
+        }
+        else{
+            status = "OUT OF STOCK";
+        }
+        product.setStatus(status);
+        if(product.getProductImages().size()>0){
+            for(ProductImage productImage : product.getProductImages()){
+               if(productImage.isMain()){
+                   mainImage = productImage;
+                }
+               else{
+                   additionalImages.add(productImage);
+               }
+            }
+            if(mainImage== null && product.getProductImages().size()>0){
+                mainImage = (ProductImage) new ArrayList(product.getProductImages()).get(0);
+            }
+        }
+        else{
+            mainImage = new ProductImage("noproduct.png");
+        }
+        product.setMainImage(mainImage);
+        product.setAdditionalImages(additionalImages);
+    }
 }

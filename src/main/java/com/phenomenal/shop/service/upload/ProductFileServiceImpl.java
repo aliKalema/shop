@@ -42,8 +42,7 @@ public class ProductFileServiceImpl implements FileService{
         new Random().nextBytes(array);
         String generated = SystemUtils.getSaltString();
         String extension = com.google.common.io.Files.getFileExtension(multipartFile.getOriginalFilename());
-        String fileName = new StringBuilder().append(generated).append(new Date().getTime())
-                .append(String.valueOf(multipartFile.getSize())).append(".").append(extension).toString();
+        String fileName = generated + new Date().getTime() + String.valueOf(multipartFile.getSize()) + "." + extension;
         this.storeFile(multipartFile,fileName);
         return fileName;
     }

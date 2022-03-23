@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -26,6 +27,7 @@ public class Product {
     @OneToMany(cascade= CascadeType.ALL,fetch= FetchType.EAGER)
     @JoinColumn(name="product_id")
     private Set<ProductImage> productImages;
-    @Transient
-    private Set<ProductImage> mainImages;
+    @Transient private ProductImage mainImage;
+    @Transient private List<ProductImage> additionalImages;
+    @Transient private String status;
 }
