@@ -1,5 +1,6 @@
 package com.phenomenal.shop.service;
 
+import com.phenomenal.shop.configuration.ProductStorageProperty;
 import com.phenomenal.shop.entity.Product;
 import com.phenomenal.shop.entity.ProductCategory;
 import com.phenomenal.shop.entity.ProductImage;
@@ -12,6 +13,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +31,9 @@ public class ProductService {
 
     @Autowired
     ProductFileServiceImpl productFileServiceImpl;
+
+    @Autowired
+    ProductStorageProperty productStorageProperty;
 
     public List<Product> getAllProducts(){
         List<Product>products = new ArrayList<>();
@@ -110,7 +117,28 @@ public class ProductService {
         else{
             mainImage = new ProductImage("noproduct.png");
         }
+        product.setCategory("NULL");
+        Optional<ProductCategory>category =  productCategoryRepository.findCategoryByProductId(product.getId());
+        category.ifPresent(productCategory -> product.setCategory(productCategory.getName()));
         product.setMainImage(mainImage);
         product.setAdditionalImages(additionalImages);
+    }
+
+    public void deleteProduct(int productId){
+        Product product =  productRepository.findById(productId).get();
+        Path productStorageLocation = Paths.get("src/main/resources/static/"+productStorageProperty.getUploadDirectory()).toAbsolutePath().normalize();
+        if(product.getProductImages().size()>0) {
+            for (ProductImage productImage : product.getProductImages()) {
+                File file = new File(productStorageLocation.resolve(productImage.getName()).toUri());
+                if (file.exists() && file.isFile()) {
+                    boolean f = file.delete();
+                }
+            }
+        }
+        productRepository.deleteById(product.getId());
+    }
+
+    public void deleteProductCategory(ProductCategory productCategory){
+        productCategoryRepository.deleteById(productCategory.getId());
     }
 }

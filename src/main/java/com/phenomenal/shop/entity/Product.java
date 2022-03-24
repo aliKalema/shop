@@ -21,7 +21,6 @@ public class Product {
     private double price;
     private int quantity;
     private String barCodeSerial;
-    private String barCodeName;
     private String description;
     private int minQuantity;
     @OneToMany(cascade= CascadeType.ALL,fetch= FetchType.EAGER)
@@ -30,4 +29,5 @@ public class Product {
     @Transient private ProductImage mainImage;
     @Transient private List<ProductImage> additionalImages;
     @Transient private String status;
+    @Transient private String category;
 }

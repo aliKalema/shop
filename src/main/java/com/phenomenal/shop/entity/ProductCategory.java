@@ -17,7 +17,7 @@ public class ProductCategory {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
-    @OneToMany(cascade= CascadeType.ALL,fetch= FetchType.EAGER)
+    @OneToMany(cascade= CascadeType.MERGE,fetch= FetchType.EAGER)
     @JoinColumn(name="product_category_id")
     private Set<Product>products;
     @Transient private double total;

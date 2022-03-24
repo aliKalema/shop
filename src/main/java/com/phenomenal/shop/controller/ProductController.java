@@ -6,10 +6,9 @@ import com.phenomenal.shop.entity.ProductImage;
 import com.phenomenal.shop.repository.ProductCategoryRepository;
 import com.phenomenal.shop.repository.ProductRepository;
 import com.phenomenal.shop.service.BarcodeService;
-import com.phenomenal.shop.service.ProductService;
 import com.phenomenal.shop.utils.SystemUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.phenomenal.shop.service.ProductService;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -68,7 +67,6 @@ public record ProductController(ProductService productService,
         }
         if(files.length>0) {
             for(MultipartFile multipartFile :files){
-                System.out.println(multipartFile.getName());
                 if(multipartFile.getName().equals(mainImageName)){
                     ProductImage mainProductImage = productService.createImage(multipartFile);
                     mainProductImage.setMain(true);
@@ -87,5 +85,17 @@ public record ProductController(ProductService productService,
         productRepository.save(product);
         productCategoryRepository.save(category.get());
         return new ResponseEntity<>(product,HttpStatus.OK);
+    }
+
+    @DeleteMapping("/api/v1/admin/products/{id}")
+    public ResponseEntity<?>deleteProduct(@PathVariable("id")int productId){
+        productService.deleteProduct(productId);
+        return new ResponseEntity(HttpStatus.OK);
+    }
+
+    @DeleteMapping("/api/v1/admin/categories/{id}")
+    public ResponseEntity<?>deleteProductCategory(@PathVariable("id")int categoryId){
+        productService.deleteProductCategory(categoryId);
+        return new ResponseEntity(HttpStatus.OK);
     }
 }
