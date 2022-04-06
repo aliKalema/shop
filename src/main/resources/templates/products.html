@@ -467,163 +467,151 @@
   <script th:src="@{/webjars/datatables/1.11.4/js/jquery.dataTables.js}"></script>
   <script th:src="@{/js/material-dashboard.min.js}"></script>
   <script th:src="@{/js/plugins/keyboard.js}"></script>
+<script th:src="@{/js/plugins/sweetalert.min.js}"></script>
   <script th:src="@{/js/plugins/chartjs.min.js}"></script>
   <script th:inline="javascript">
     var products = [[${products}]];
   </script>
-  <script>
-  function successNotify(message){
-    document.getElementById('success-toast-message').innerText = message;
-    $('#successToast').toast('show');
-  }
-  function errorNotify(message){
-    document.getElementById('error-toast-message').innerText = message;
-    $('#errorToast').toast('show');
-  }
-</script>
-  <script>
-    if (document.getElementById('products-list')) {
-      // const productsdataTable = new simpleDatatables.DataTable("#products-list", {
-      //   searchable: true,
-      //   fixedHeight: false,
-      //   perPage: 7,
-      //   columnDefs: [
-      //     { className: "td-actions text-right", "targets": [ 1 ] },
-      //     { className: "td-actions text-right", "targets": [ 2 ] },
-      //     { className: "td-actions text-right", "targets": [ 3] },
-      //     { className: "td-actions text-right", "targets": [ 4 ] },
-      //     { className: "td-actions text-right", "targets": [ 5 ] }
-      //   ]
-      // });
-      $('products-list').DataTable({
-        "sDom": 'lrtip',
-        "lengthMenu": [ [-1, 500, 200,100, 50], ["All", 500, 200, 100, 50] ],
-        "columnDefs": [
-          { className: "text-sm", "targets": [ 1 ] },
-          { className: "text-sm", "targets": [ 2 ] },
-          { className: "text-sm", "targets": [ 3] },
-          { className: "text-sm", "targets": [ 4 ] },
-          { className: "text-sm", "targets": [ 5 ] }
-        ]
-      });
-      var productsdataTable = $('#products-list').DataTable();
-
-      document.querySelectorAll(".export").forEach(function(el) {
-        el.addEventListener("click", function(e) {
-          var type = el.dataset.type;
-          var data = {
-            type: type,
-            filename: "material-" + type,
-          };
-          if (type === "csv") {
-            data.columnDelimiter = "|";
-          }
-          productsdataTable.export(data);
-        });
-      });
-      for(let product of products){
-        let status;
-        if(product.status.toLowerCase() ==="in stock"){
-          status = `<span class="badge badge-success badge-sm">in Stock</span>`;
-        }
-        else if(product.status.toLowerCase() ==="below minimum"){ status=`<span class="badge badge-warning badge-sm">Out Of Stock</span>`;}
-        else{status = `<span class="badge badge-danger badge-sm">Below Minimun</span>`;}
-        productsdataTable.row.add([
-          `<div class="d-flex">
-            <div>
-              <img src="/products-upload/${product.mainImage.name}" class="avatar avatar-md me-3" alt="table image">
-            </div>
-            <h6 class="ms-3 my-auto">${product.name}</h6>
-          </div>`,
-          `<div class="text-sm"> ${product.category}</div>`,
-          `<div class="text-sm"> ${product.price}</div>`,
-          `<div class="text-sm"> ${product.barCodeSerial}</div>`,
-          `<div class="text-sm"> ${product.quantity}</div>`,
-          status,
-          '<td class="text-sm"><a href="javascript:;" data-bs-toggle="tooltip" data-bs-original-title="Preview product"><i class="material-icons text-secondary position-relative text-lg">visibility</i></a><a href="javascript:;" class="mx-3" data-bs-toggle="tooltip" data-bs-original-title="Edit product"><i class="material-icons text-secondary position-relative text-lg">drive_file_rename_outline</i></a><a href="javascript:;" data-bs-toggle="tooltip" data-bs-original-title="Delete product"><i class="material-icons text-secondary position-relative text-lg">delete</i></a></td>'
-        ]).draw();
-      }
-    };
-
-  </script>
   <!-- Kanban scripts -->
   <script th:src="@{/js/plugins/dragula/dragula.min.js}"></script>
   <script th:src="@{/js/plugins/jkanban/jkanban.js}"></script>
-  <script>
-    var win = navigator.platform.indexOf('Win') > -1;
-    if (win && document.querySelector('#sidenav-scrollbar')) {
-      var options = {
-        damping: '0.5'
-      }
-      Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
-    }
-  </script>
 <script th:inline="javascript">
   var categories = [[${categories}]];
   var products = [[${products}]];
 </script>
-  <script>
-    var ctx4 = document.getElementById("pie-chart").getContext("2d");
-    new Chart(ctx4, {
-      type: "pie",
-      data: {
-        labels: ['Facebook', 'Direct', 'Organic', 'Referral'],
-        datasets: [{
-          label: "Projects",
-          weight: 9,
-          cutout: 0,
-          tension: 0.9,
-          pointRadius: 2,
-          borderWidth: 2,
-          backgroundColor: ['#03A9F4', '#e91e63', '#3A416F', '#a8b8d8'],
-          data: [15, 20, 12, 60],
-          fill: false
-        }],
+<script>
+  $('products-list').DataTable({
+    "sDom": 'lrtip',
+    "lengthMenu": [ [-1, 500, 200,100, 50], ["All", 500, 200, 100, 50] ],
+    "columnDefs": [
+      { className: "text-sm", "targets": [ 1 ] },
+      { className: "text-sm", "targets": [ 2 ] },
+      { className: "text-sm", "targets": [ 3] },
+      { className: "text-sm", "targets": [ 4 ] },
+      { className: "text-sm", "targets": [ 5 ] }
+    ]
+  });
+  var productsdataTable = $('#products-list').DataTable();
+  for(let product of products){
+    let status;
+    if(product.status.toLowerCase() ==="in stock"){
+      status = `<span class="badge badge-success badge-sm">in Stock</span>`;
+    }
+    else if(product.status.toLowerCase() ==="below minimum"){
+      status=`<span class="badge badge-warning badge-sm">Out Of Stock</span>`;
+    }
+    else{status = `<span class="badge badge-danger badge-sm">Below Minimum</span>`;}
+    productsdataTable.row.add([
+      `<div class="d-flex">
+        <div>
+          <img src="/products-upload/${product.mainImage.name}" class="avatar avatar-md me-3" alt="table image">
+        </div>
+        <h6 class="ms-3 my-auto">${product.name}</h6>
+      </div>`,
+      `<div class="text-sm"> ${product.category}</div>`,
+      `<div class="text-sm"> ${product.price}</div>`,
+      `<div class="text-sm"> ${product.barCodeSerial}</div>`,
+      `<div class="text-sm"> ${product.quantity}</div>`,
+      status,
+      `<td class="text-sm"><a onclick="viewProduct( ${product.id} )" data-bs-toggle="tooltip" data-bs-original-title="Preview product"><i class="material-icons text-secondary position-relative text-lg">visibility</i></a><a onclick="editProduct(${product.id})" class="mx-3" data-bs-toggle="tooltip" data-bs-original-title="Edit product"><i class="material-icons text-secondary position-relative text-lg">drive_file_rename_outline</i></a><a onclick="deleteProduct(${product.id},this)" data-bs-toggle="tooltip" data-bs-original-title="Delete product"><i class="material-icons text-secondary position-relative text-lg">delete</i></a></td>`
+    ]).draw();
+  }
+  var ctx4 = document.getElementById("pie-chart").getContext("2d");
+  new Chart(ctx4, {
+    type: "pie",
+    data: {
+      labels: ['Facebook', 'Direct', 'Organic', 'Referral'],
+      datasets: [{
+        label: "Projects",
+        weight: 9,
+        cutout: 0,
+        tension: 0.9,
+        pointRadius: 2,
+        borderWidth: 2,
+        backgroundColor: ['#03A9F4', '#e91e63', '#3A416F', '#a8b8d8'],
+        data: [15, 20, 12, 60],
+        fill: false
+      }],
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          display: false,
+        }
       },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          legend: {
+      interaction: {
+        intersect: false,
+        mode: 'index',
+      },
+      scales: {
+        y: {
+          grid: {
+            drawBorder: false,
+            display: false,
+            drawOnChartArea: false,
+            drawTicks: false,
+          },
+          ticks: {
+            display: false
+          }
+        },
+        x: {
+          grid: {
+            drawBorder: false,
+            display: false,
+            drawOnChartArea: false,
+            drawTicks: false,
+          },
+          ticks: {
             display: false,
           }
         },
-        interaction: {
-          intersect: false,
-          mode: 'index',
-        },
-        scales: {
-          y: {
-            grid: {
-              drawBorder: false,
-              display: false,
-              drawOnChartArea: false,
-              drawTicks: false,
-            },
-            ticks: {
-              display: false
-            }
-          },
-          x: {
-            grid: {
-              drawBorder: false,
-              display: false,
-              drawOnChartArea: false,
-              drawTicks: false,
-            },
-            ticks: {
-              display: false,
-            }
-          },
-        },
       },
-    });
-  </script>
-<script>
-  $(document).ready(function() {
-
+    },
   });
-  document.getElementById('add-category-form').addEventListener('submit',addCategory)
+
+  document.getElementById('add-category-form').addEventListener('submit',addCategory);
+
+  function viewProduct(id){
+    window.location.href = `/admin/product/${id}`;
+  }
+
+  function editProduct(id){
+    window.location.href=`/admin/product/edit/${id}`;
+  }
+
+  function deleteProduct(id,element){
+    Swal.fire({
+      title: 'Confirm',
+      text: "Permanent delete product",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#28ba62',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetch(`/api/v1/admin/products/{id}/${id}`,{
+          method:'DELETE'
+        }).then(function(res){
+          if(!res.ok){
+            errorNotify("Something Went Wrong");
+
+          }
+          else{
+            Swal.fire(
+                    'Deleted!',
+                    'Your file has been deleted.',
+                    'success'
+            );
+            element.parentNode.parentNode.remove();
+          }
+        });
+      }
+    })
+  }
 
   function addCategory(e){
     e.preventDefault();
@@ -663,6 +651,7 @@
   function generateRandomColor(){
     return "#"+(Math.floor(Math.random()*16777215).toString(16)).toString();
   }
+
 </script>
 </body>
 

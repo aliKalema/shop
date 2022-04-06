@@ -23,6 +23,9 @@ public class UserPrinciple implements UserDetails {
 		}
 		return grantedAuthorities;
 	}
+	public User getUser(){
+		return user;
+	}
 
 	@Override
 	public String getPassword() {

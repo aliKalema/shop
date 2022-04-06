@@ -13,16 +13,19 @@ import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.security.core.session.SessionRegistryImpl;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.session.HttpSessionEventPublisher;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-    private UserPrincipleService userPrincipleService;
+    private final UserPrincipleService userPrincipleService;
+    private  final AuthSuccessHandler authSuccessHandler;
 
-    public SecurityConfig(UserPrincipleService myUserDetailsService) {
+    public SecurityConfig(UserPrincipleService myUserDetailsService,AuthSuccessHandler authSuccessHandler) {
         this.userPrincipleService = myUserDetailsService;
+        this.authSuccessHandler = authSuccessHandler;
     }
 
     @Override
@@ -40,8 +43,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/admin/**").hasAnyRole("ADMIN")
                 .anyRequest().authenticated()
                 .and()
-                .formLogin().loginPage("/login").permitAll()
-                .failureHandler(authenticationFailureHandler())
+                .formLogin()
+                .loginPage("/login")
+                .permitAll()
+                .successHandler(authSuccessHandler)
+                //.failureHandler(authenticationFailureHandler())
                 .and()
                 .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login")
                 .and()
@@ -62,10 +68,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return daoAuthenticationProvider;
     }
 
-    @Bean
-    public AuthenticationFailureHandler authenticationFailureHandler() {
-        return new CustomAuthenticationFailureHandler();
-    }
+
+//    @Bean
+//    public AuthenticationFailureHandler authenticationFailureHandler() {
+//        return new CustomAuthenticationFailureHandler();
+//    }
 
     @Bean
     public SessionRegistry sessionRegistry() {

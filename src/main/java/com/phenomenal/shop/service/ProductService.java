@@ -38,7 +38,7 @@ public class ProductService {
     public List<Product> getAllProducts(){
         List<Product>products = new ArrayList<>();
         productRepository.findAll().forEach(products::add);
-        products.forEach(this:: setProductStructure);
+        products.forEach(product ->{setProductStructure(product,true);});
         return products;
     }
 
@@ -54,6 +54,10 @@ public class ProductService {
         category.setName(name);
         productCategoryRepository.save(category);
         return new ResponseEntity(category,HttpStatus.OK);
+    }
+
+    public Optional<Product> findById(int productId){
+        return productRepository.findById(productId);
     }
 
     public ResponseEntity<ProductCategory> addProductToProductCategory(int productCategoryId, int productId){
@@ -87,7 +91,7 @@ public class ProductService {
         productCategory.setTotal(total);
     }
 
-    public void setProductStructure(Product product){
+    public void setProductStructure(Product product,boolean generateMainImage){
         String status = "";
         ProductImage mainImage = null;
         List<ProductImage>additionalImages = new ArrayList<>();
@@ -115,7 +119,9 @@ public class ProductService {
             }
         }
         else{
-            mainImage = new ProductImage("noproduct.png");
+            if(generateMainImage){
+                mainImage = new ProductImage("noproduct.png");
+            }
         }
         product.setCategory("NULL");
         Optional<ProductCategory>category =  productCategoryRepository.findCategoryByProductId(product.getId());

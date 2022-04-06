@@ -141,12 +141,20 @@
       redirect: "follow"
     }).then(function(res){
       if(!res.ok){
-        errorNotify("Wrong Username or Password");
+        errorNotify("Something  Went Wrong");
         form.reset();
         throw new Error('Something Went Wrong');
       }
       else{
-        window.location.href= res.url;
+        const url =  res.url;
+        const baseURL = window.location.origin;
+        if(url===baseURL+"/login?error"){
+          form.reset();
+          errorNotify("Wrong Username or Password");
+        }
+        else{
+          window.location.href= url;
+        }
       }
     })
 
