@@ -479,6 +479,7 @@
     autoProcessQueue: false,
     addRemoveLinks: true,
   }
+
     Dropzone.options.additionalImgs= {
       uploadMultiple: false,
       autoProcessQueue: false,
@@ -502,91 +503,91 @@
       });
       document.getElementById('save-btn').addEventListener('click',submitProduct);
     });
+
     function submitProduct(e){
-      const mainImg = Dropzone.forElement("#mainImg").files[0];
-      console.log(mainImg);
+      e.preventDefault();
+      const name =  document.getElementById('name');
+      const price =  document.getElementById('price');
+      const quantity =  document.getElementById('quantity');
+      const minQuantity =  document.getElementById('min-quantity');
+      const category =  document.getElementById('category');
+      const description = document.getElementById('description');
+      const barcodeNumber =  document.getElementById('barcode-number');
+      const autoGenerateBarCode = document.getElementById('auto-generate-barcode');
+      const files= [];
+      let mainImgName="";
+      const formData = new FormData();
+      formData.append("name",name.value);
+      formData.append("price",price.value);
+      formData.append("quantity",quantity.value);
+      formData.append("minQuantity",minQuantity.value);
+      formData.append("categoryId",category.value);
+      formData.append("description",description.value);
+      if(autoGenerateBarCode.checked){
+        formData.append("generate",true);
+        formData.append("barcode","");
+      }
+      else{
+        formData.append("generate",false);
+        formData.append("barcode",barcodeNumber.value);
+      }
+      if(Dropzone.forElement("#mainImg").files.length>0){
+        const mainImg = Dropzone.forElement("#mainImg").files[0];
+        structureFile(mainImg);
+        formData.append("files",mainImg);
+        mainImgName = mainImg.name;
+      }
+      if(Dropzone.forElement("#additionalImgs").files.length>0){
+        const additionalImgs = Dropzone.forElement("#additionalImgs").files;
+        for(let img of additionalImgs){
+          structureFile(img);
+          formData.append("files",img);
+        }
+      }
+      formData.append("mainImgName",mainImgName);
+      fetch("/api/v1/admin/products",{
+        method:'POST',
+        body:formData
+      }).then(function(res){
+        if(res.status === 409){
+          displayProductExist(res);
+          throw new Error(res.statusText);
+        }
+        else if(!res.ok){
+          errorNotify("Something Went Wrong");
+          throw new Error(res.statusText);
+        }
+        return res.json();
+      })
+      .then(function(product){
+        Swal.fire({
+          title: 'Success!',
+          icon:'Product Added Successfully',
+          text: 'Template Cleared',
+          type: 'success',
+          timer: 1500,
+          confirmButtonClass: "btn btn-success",
+          buttonsStyling: false
+        }).catch(swal.noop)
+      }).then(function(){
+        window.location.href="/admin/product";
+      })
     }
-    // function submitProduct(e){
-    //   e.preventDefault();
-    //   const name =  document.getElementById('name');
-    //   const price =  document.getElementById('price');
-    //   const quantity =  document.getElementById('quantity');
-    //   const minQuantity =  document.getElementById('min-quantity');
-    //   const category =  document.getElementById('category');
-    //   const description = document.getElementById('description');
-    //   const barcodeNumber =  document.getElementById('barcode-number');
-    //   const autoGenerateBarCode = document.getElementById('auto-generate-barcode');
-    //   const files= [];
-    //   let mainImgName="";
-    //   const formData = new FormData();
-    //   formData.append("name",name.value);
-    //   formData.append("price",price.value);
-    //   formData.append("quantity",quantity.value);
-    //   formData.append("minQuantity",minQuantity.value);
-    //   formData.append("categoryId",category.value);
-    //   formData.append("description",description.value);
-    //   if(autoGenerateBarCode.checked){
-    //     formData.append("generate",true);
-    //     formData.append("barcode","");
-    //   }
-    //   else{
-    //     formData.append("generate",false);
-    //     formData.append("barcode",barcodeNumber.value);
-    //   }
-    //   if(Dropzone.forElement("#mainImg").files.length>0){
-    //     const mainImg = Dropzone.forElement("#mainImg").files[0];
-    //     structureFile(mainImg);
-    //     formData.append("files",mainImg);
-    //     mainImgName = mainImg.name;
-    //   }
-    //   if(Dropzone.forElement("#additionalImgs").files.length>0){
-    //     const additionalImgs = Dropzone.forElement("#additionalImgs").files;
-    //     for(let img of additionalImgs){
-    //       structureFile(img);
-    //       formData.append("files",img);
-    //     }
-    //   }
-    //   formData.append("mainImgName",mainImgName);
-    //   fetch("/api/v1/admin/products",{
-    //     method:'POST',
-    //     body:formData
-    //   }).then(function(res){
-    //     if(res.status === 409){
-    //       displayProductExist(res);
-    //       throw new Error(res.statusText);
-    //     }
-    //     else if(!res.ok){
-    //       errorNotify("Something Went Wrong");
-    //       throw new Error(res.statusText);
-    //     }
-    //     return res.json();
-    //   })
-    //   .then(function(product){
-    //     Swal.fire({
-    //       title: 'Success!',
-    //       icon:'Product Added Successfully',
-    //       text: 'Template Cleared',
-    //       type: 'success',
-    //       timer: 1500,
-    //       confirmButtonClass: "btn btn-success",
-    //       buttonsStyling: false
-    //     }).catch(swal.noop)
-    //   }).then(function(){
-    //     window.location.href="/admin/product";
-    //   })
-    // }
+
     function addOption(optionValue) {
       const option = document.createElement("option");
       option.setAttribute("value", optionValue.id);
       option.innerText = optionValue.name;
       document.getElementById('category').appendChild(option);
     }
+
     function displayProductExist(productPromise){
       productPromise.then(value=>value.json())
       .then(function(product){
         console.log(product.name);
       });
     }
+
     function structureFile(mainImg){
       delete mainImg.accepted;
       delete mainImg.dataURL;

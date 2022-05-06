@@ -2,6 +2,7 @@ package com.phenomenal.shop.controller;
 
 import com.phenomenal.shop.entity.Product;
 import com.phenomenal.shop.service.ProductService;
+import com.phenomenal.shop.service.CustomerService;
 import com.phenomenal.shop.service.SalesService;
 import com.phenomenal.shop.service.UserService;
 import com.phenomenal.shop.utils.SystemUtils;
@@ -16,17 +17,20 @@ import java.util.Optional;
 @RestController
 public record PageController(UserService userSettingsService,
                              ProductService productService,
-                             SalesService salesService) {
+                             SalesService salesService,
+                             CustomerService customerService) {
     @GetMapping("/login")
     public ModelAndView loginPage(){
         ModelAndView mav =  SystemUtils.createMav("login");
         return mav;
     }
+
     @GetMapping("/")
     public ModelAndView homePage(Authentication authentication){
         ModelAndView mav =  SystemUtils.createMav("pos");
         mav.addObject("user",userSettingsService.getUserSettings(authentication));
-        mav.addObject("productCategories",productService.getAllProductCategories());
+        mav.addObject("categories",productService.getCategoriesWithProduct());
+        mav.addObject("customers",customerService.getCustomers());
         return mav;
     }
 

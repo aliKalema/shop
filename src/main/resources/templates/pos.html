@@ -5,9 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="apple-touch-icon" sizes="76x76" th:href="@{/img/apple-icon.png}">
   <link rel="icon" type="image/png" th:href="@{/img/favicon.png}">
-  <title>
-    POS
-  </title>
+  <title>POS</title>
   <!--     Fonts and icons     -->
   <link rel="stylesheet" type="text/css" th:href="@{/css/ggle-fonts.css}" />
   <!-- Nucleo Icons -->
@@ -112,228 +110,226 @@
     </div>
   </aside>
   <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg " style="min-height: 100%">
-
-
     <div class="main-right-bar-container">
       <div class="category-main-container">
         <div class="category-main-wrapper">
-
+          <nav class="navbar navbar-main navbar-expand-lg position-sticky mt-4 top-1 px-0 mx-4 shadow-none border-radius-xl z-index-sticky" id="navbarBlur" data-scroll="true">
+            <div class="container-fluid py-1 px-3">
+              <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
+                <div class="ms-md-auto pe-md-3 d-flex align-items-center">
+                  <div class="input-group input-group-outline">
+                    <label class="form-label">Search</label>
+                    <input type="text" id="search-input" class="form-control" onfocus="focused(this)" onfocusout="defocused(this)">
+                  </div>
+                </div>
+                <ul class="navbar-nav  justify-content-end">
+                  <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
+                    <a href="javascript:;" class="nav-link text-body p-0" id="iconNavbarSidenav">
+                      <div class="sidenav-toggler-inner">
+                        <i class="sidenav-toggler-line"></i>
+                        <i class="sidenav-toggler-line"></i>
+                        <i class="sidenav-toggler-line"></i>
+                      </div>
+                    </a>
+                  </li>
+                  <li class="nav-item px-3">
+                    <a href="javascript:;" class="nav-link text-body p-0">
+                      <i class="material-icons fixed-plugin-button-nav cursor-pointer">
+                        settings
+                      </i>
+                    </a>
+                  </li>
+                  <li class="nav-item px-3">
+                    <a th:href="@{/logout}" class="nav-link text-body p-0">
+                      <i class="material-icons fixed-plugin-button-nav cursor-pointer">
+                        logout
+                      </i>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </nav>
+          <div class="px-2 py-2" style="display:flex;justify-content: space-between;">
+            <h4 id="menu-title">Categories</h4>
+            <a id="menu-back" onclick="createCategories()" class="btn btn-sm btn-outline-secondary " style="display:none">Back</a>
+          </div>
+          <div class="product-category-menu row px-2"></div>
         </div>
       </div>
       <div class="category-main-separator"></div>
       <div class="right-bar-container nav-tabs-grid">
-        <div class="nav-wrapper position-relative end-0 nav-tabs-grid-header">
-          <ul class="nav nav-pills nav-fill p-1" role="tablist">
-            <li class="nav-item" style="height:60px;">
-              <a class="nav-link mb-0 px-0 py-1 active" data-bs-toggle="tab" href="#sales-tab-content" role="tab" aria-controls="preview" aria-selected="true" style="height:60px;">
-                <div class="nav-link-icon-label">
-                  <span class="material-icons align-middle mb-1">
-                  shopping_bag
-                  </span>
-                  <h6 class="align-middle mb-1">Sale</h6>
-                </div>
-              </a>
-            </li>
-            <li class="nav-item" style="height:60px;">
-              <a class="nav-link mb-0 px-0 py-1" data-bs-toggle="tab" href="#dash-tabs-icons" role="tab" aria-controls="code" aria-selected="false" style="height:60px;">
-                <div class="nav-link-icon-label">
-                  <span class="material-icons align-middle mb-1">
-                  hourglass_disabled
-                  </span>
-                  <h6 class="align-middle mb-1">Onhold</h6>
-                </div>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link mb-0 px-0 py-1" data-bs-toggle="tab" href="#dashboard-tabs-icons" role="tab" aria-controls="code" aria-selected="false">
-                <div class="nav-link-icon-label">
-                  <span class="material-icons align-middle mb-1">
-                  face
-                  </span>
-                  <h6 class="align-middle mb-1">Customers</h6>
-                </div>
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div class="tab-content nav-tabs-grid-content" id="myTabContent">
-          <div class="tab-pane fade show active my-tab-pane" id="sales-tab-content" role="tabpanel" aria-labelledby="home-tab">
-              <div class="product-quantity-table">
-                <div class="table-responsive  product-table" >
-                  <table class="table align-items-center mb-0">
-                    <thead>
-                    <tr>
-                      <th class="text-uppercase text-dark text-xxs font-weight-bolder  ps-2"><h6>PRODUCT</h6></th>
-                      <th class="text-uppercase text-dark text-xxs font-weight-bolder  ps-2"><h6>QUANTITY</h6></th>
-                      <th class="text-uppercase text-dark text-xxs font-weight-bolder  ps-2"><h6>AMOUNT</h6></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                      <td>
-                        <p class="text-sm font-weight-normal mb-0">bits</p>
-                      </td>
-                      <td>
-                        <p class="text-sm font-weight-normal mb-0">345</p>
-                      </td>
-                      <td>
-                        <p class="text-sm font-weight-normal mb-0">00:17:07</p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <p class="text-sm font-weight-normal mb-0">argon-dashboard</p>
-                      </td>
-                      <td>
-                        <p class="text-sm font-weight-normal mb-0">520</p>
-                      </td>
-                      <td>
-                        <p class="text-sm font-weight-normal mb-0">00:23:13</p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <p class="text-sm font-weight-normal mb-0">bits</p>
-                      </td>
-                      <td>
-                        <p class="text-sm font-weight-normal mb-0">345</p>
-                      </td>
-                      <td>
-                        <p class="text-sm font-weight-normal mb-0">00:17:07</p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <p class="text-sm font-weight-normal mb-0">bits</p>
-                      </td>
-                      <td>
-                        <p class="text-sm font-weight-normal mb-0">345</p>
-                      </td>
-                      <td>
-                        <p class="text-sm font-weight-normal mb-0">00:17:07</p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <p class="text-sm font-weight-normal mb-0">bits</p>
-                      </td>
-                      <td>
-                        <p class="text-sm font-weight-normal mb-0">345</p>
-                      </td>
-                      <td>
-                        <p class="text-sm font-weight-normal mb-0">00:17:07</p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <p class="text-sm font-weight-normal mb-0">bits</p>
-                      </td>
-                      <td>
-                        <p class="text-sm font-weight-normal mb-0">345</p>
-                      </td>
-                      <td>
-                        <p class="text-sm font-weight-normal mb-0">00:17:07</p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <p class="text-sm font-weight-normal mb-0">bits</p>
-                      </td>
-                      <td>
-                        <p class="text-sm font-weight-normal mb-0">345</p>
-                      </td>
-                      <td>
-                        <p class="text-sm font-weight-normal mb-0">00:17:07</p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <p class="text-sm font-weight-normal mb-0">pages/soft-ui-dashboard</p>
-                      </td>
-                      <td>
-                        <p class="text-sm font-weight-normal mb-0">122</p>
-                      </td>
-                      <td>
-                        <p class="text-sm font-weight-normal mb-0">00:3:10</p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <p class="text-sm font-weight-normal mb-0">bootstrap-themes</p>
-                      </td>
-                      <td>
-                        <p class="text-sm font-weight-normal mb-0">1,900</p>
-                      </td>
-                      <td>
-                        <p class="text-sm font-weight-normal mb-0">00:30:42</p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <p class="text-sm font-weight-normal mb-0">material-dashboard-pro</p>
-                      </td>
-                      <td>
-                        <p class="text-sm font-weight-normal mb-0">2,115</p>
-                      </td>
-                      <td>
-                        <p class="text-sm font-weight-normal mb-0">00:50:11</p>
-                      </td>
-                    </tr>
-                    </tbody>
-                  </table>
-                </div>
-                <div class="calculator-container">
-                  <div class="total-container">
+<!--        <div class="nav-wrapper position-relative end-0 nav-tabs-grid-header">-->
+<!--          <ul class="nav nav-pills nav-fill p-1" role="tablist">-->
+<!--            <li class="nav-item" style="height:60px;">-->
+<!--              <a class="nav-link mb-0 px-0 py-1 active" data-bs-toggle="tab" href="#sales-tab-content" role="tab" aria-controls="preview" aria-selected="true" style="height:60px;">-->
+<!--                <div class="nav-link-icon-label">-->
+<!--                  <span class="material-icons align-middle mb-1">-->
+<!--                  shopping_bag-->
+<!--                  </span>-->
+<!--                  <h6 class="align-middle mb-1">Sale</h6>-->
+<!--                </div>-->
+<!--              </a>-->
+<!--            </li>-->
+<!--            <li class="nav-item" style="height:60px;">-->
+<!--              <a class="nav-link mb-0 px-0 py-1" data-bs-toggle="tab" href="#dash-tabs-icons" role="tab" aria-controls="code" aria-selected="false" style="height:60px;">-->
+<!--                <div class="nav-link-icon-label">-->
+<!--                  <span class="material-icons align-middle mb-1">-->
+<!--                  hourglass_disabled-->
+<!--                  </span>-->
+<!--                  <h6 class="align-middle mb-1">Onhold</h6>-->
+<!--                </div>-->
+<!--              </a>-->
+<!--            </li>-->
+<!--            <li class="nav-item">-->
+<!--              <a class="nav-link mb-0 px-0 py-1" data-bs-toggle="tab" href="#dashboard-tabs-icons" role="tab" aria-controls="code" aria-selected="false">-->
+<!--                <div class="nav-link-icon-label">-->
+<!--                  <span class="material-icons align-middle mb-1">-->
+<!--                  face-->
+<!--                  </span>-->
+<!--                  <h6 class="align-middle mb-1">Customers</h6>-->
+<!--                </div>-->
+<!--              </a>-->
+<!--            </li>-->
+<!--          </ul>-->
+<!--        </div>-->
+<!--        <div class="tab-content nav-tabs-grid-content" id="myTabContent">-->
+<!--          <div class="tab-pane fade show active my-tab-pane" id="sales-tab-content" role="tabpanel" aria-labelledby="home-tab">-->
+<!--              <div class="product-quantity-table">-->
+<!--                <div class="table-responsive  product-table p-0" >-->
+<!--                  <table class="table align-items-center mb-0">-->
+<!--                    <thead>-->
+<!--                    <tr>-->
+<!--                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Product</th>-->
+<!--                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Quantity</th>-->
+<!--                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Amount</th>-->
+<!--                    </tr>-->
+<!--                    </thead>-->
+<!--                    <tbody id="cart-table">-->
+<!--                    </tbody>-->
+<!--                  </table>-->
+<!--                </div>-->
+<!--                <div class="calculator-container">-->
+<!--                  <div class="total-container">-->
 
+<!--                  </div>-->
+<!--                  <div class="calculator-wrapper">-->
+<!--                    <div class="num-input-container">-->
+<!--                      <div class="cal-num">7</div>-->
+<!--                      <div class="cal-num">8</div>-->
+<!--                      <div class="cal-num">9</div>-->
+<!--                      <div class="cal-num">4</div>-->
+<!--                      <div class="cal-num">5</div>-->
+<!--                      <div class="cal-num">6</div>-->
+<!--                      <div class="cal-num">1</div>-->
+<!--                      <div class="cal-num">2</div>-->
+<!--                      <div class="cal-num">3</div>-->
+<!--                      <div class="cal-num">-</div>-->
+<!--                      <div class="cal-num">0</div>-->
+<!--                      <div class="cal-num">.</div>-->
+<!--                    </div>-->
+<!--                    <div class="total-paid-bal-container">-->
+<!--                      <div class="total-paid-container">-->
+<!--                        <div class="mb-1 text-dark text-lg font-weight-bold">Total</div>-->
+<!--                        <div id="cart-total" class="d-flex align-items-center text-dark text-gradient text-lg font-weight-bold">-->
+<!--                           0.00-->
+<!--                        </div>-->
+<!--                      </div>-->
+<!--                      <div class="total-paid-container">-->
+<!--                        <div class="mb-1 text-dark text-lg font-weight-bold">Cash</div>-->
+<!--                        <div id="cash-payment" class="d-flex align-items-center text-dark text-gradient text-lg font-weight-bold">-->
+<!--                           0.00-->
+<!--                        </div>-->
+<!--                      </div>-->
+<!--                      <div class="total-paid-container">-->
+<!--                        <div class="mb-1 text-dark text-lg font-weight-bold">Balance</div>-->
+<!--                        <div id="cash-balance" class="d-flex align-items-center text-success text-gradient text-lg font-weight-bold">-->
+<!--                           0.00-->
+<!--                        </div>-->
+<!--                      </div>-->
+<!--                      <button type="button" class="btn btn-info" style="width:100%">Pay</button>-->
+<!--                    </div>-->
+<!--                  </div>-->
+<!--                  <div  style="padding-top:7px;display:flex;justify-content: space-between;width:96%;">-->
+<!--                      <div><button type="button" onclick="gth()" class="btn btn-secondary">Print</button></div>-->
+<!--                      <div><button type="button" class="btn btn-success">Onhold</button></div>-->
+<!--                      <div><button type="button" class="btn btn-warning">Discount</button></div>-->
+<!--                      <div><button type="button" class="btn btn-danger">Cancel</button></div>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">kkkkkkk</div>-->
+<!--          <div class="tab-pane fade" id="dash-tabs-icons" role="tabpanel" aria-labelledby="contact-tab">lllplp</div>-->
+<!--        </div>-->
+        <div class="tab-content nav-tabs-grid-content">
+          <div class="position-relative">
+          <div class="my-tab-pane">
+            <div class="product-quantity-table">
+              <div class="table-responsive  product-table p-0" >
+                <table class="table align-items-center mb-0">
+                  <thead>
+                  <tr>
+                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Product</th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Quantity</th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Amount</th>
+                  </tr>
+                  </thead>
+                  <tbody id="cart-table">
+                  </tbody>
+                </table>
+              </div>
+              <div class="calculator-container">
+                <div class="total-container">
+
+                </div>
+                <div class="calculator-wrapper">
+                  <div class="num-input-container">
+                    <div class="cal-num">7</div>
+                    <div class="cal-num">8</div>
+                    <div class="cal-num">9</div>
+                    <div class="cal-num">4</div>
+                    <div class="cal-num">5</div>
+                    <div class="cal-num">6</div>
+                    <div class="cal-num">1</div>
+                    <div class="cal-num">2</div>
+                    <div class="cal-num">3</div>
+                    <div class="cal-num">-</div>
+                    <div class="cal-num">0</div>
+                    <div class="cal-num">.</div>
                   </div>
-                  <div class="calculator-wrapper">
-                    <div class="num-input-container">
-                      <div class="cal-num">7</div>
-                      <div class="cal-num">8</div>
-                      <div class="cal-num">9</div>
-                      <div class="cal-num">4</div>
-                      <div class="cal-num">5</div>
-                      <div class="cal-num">6</div>
-                      <div class="cal-num">1</div>
-                      <div class="cal-num">2</div>
-                      <div class="cal-num">3</div>
-                      <div class="cal-num">-</div>
-                      <div class="cal-num">0</div>
-                      <div class="cal-num">.</div>
+                  <div class="total-paid-bal-container">
+                    <div class="total-paid-container">
+                      <div class="mb-1 text-dark text-lg font-weight-bold">Total</div>
+                      <div id="cart-total" class="d-flex align-items-center text-dark text-gradient text-lg font-weight-bold">
+                        0.00
+                      </div>
                     </div>
-                    <div class="total-paid-bal-container">
-                      <div class="total-paid-container">
-                        <div class="mb-1 text-dark text-lg font-weight-bold">Total</div>
-                        <div class="d-flex align-items-center text-dark text-gradient text-lg font-weight-bold">
-                           2500
-                        </div>
+                    <div class="total-paid-container">
+                      <div class="mb-1 text-dark text-lg font-weight-bold">Cash</div>
+                      <div id="cash-payment" class="d-flex align-items-center text-dark text-gradient text-lg font-weight-bold">
+                        0.00
                       </div>
-                      <div class="total-paid-container">
-                        <div class="mb-1 text-dark text-lg font-weight-bold">Cash</div>
-                        <div class="d-flex align-items-center text-dark text-gradient text-lg font-weight-bold">
-                           2500
-                        </div>
-                      </div>
-                      <div class="total-paid-container">
-                        <div class="mb-1 text-dark text-lg font-weight-bold">Balance</div>
-                        <div class="d-flex align-items-center text-success text-gradient text-lg font-weight-bold">
-                           2500
-                        </div>
-                      </div>
-                      <button type="button" class="btn btn-info" style="width:100%">Pay</button>
                     </div>
+                    <div class="total-paid-container">
+                      <div class="mb-1 text-dark text-lg font-weight-bold">Balance</div>
+                      <div id="cash-balance" class="d-flex align-items-center text-success text-gradient text-lg font-weight-bold">
+                        0.00
+                      </div>
+                    </div>
+                    <button type="button" class="btn btn-info" style="width:100%">Pay</button>
                   </div>
-                  <div  style="padding-top:7px;display:flex;justify-content: space-between;width:96%;">
-                      <div><button type="button" onclick="gth()" class="btn btn-secondary">Print</button></div>
-                      <div><button type="button" class="btn btn-success">Onhold</button></div>
-                      <div><button type="button" class="btn btn-warning">Discount</button></div>
-                      <div><button type="button" class="btn btn-danger">Cancel</button></div>
-                  </div>
+                </div>
+                <div  style="padding-top:7px;display:flex;justify-content: space-between;width:96%;">
+                  <div><button type="button" onclick="gth()" class="btn btn-secondary">Print</button></div>
+                  <div><button type="button" class="btn btn-success">Onhold</button></div>
+                  <div><button type="button" class="btn btn-warning">Discount</button></div>
+                  <div><button type="button" class="btn btn-danger">Cancel</button></div>
                 </div>
               </div>
             </div>
-          <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">kkkkkkk</div>
-          <div class="tab-pane fade" id="dash-tabs-icons" role="tabpanel" aria-labelledby="contact-tab">lllplp</div>
+          </div>
+        </div>
         </div>
       </div>
     </div>
@@ -343,6 +339,7 @@
           <i class="material-icons py-2">close</i>
       </a>
   </div>
+
   <div class="fixed-plugin" style="display: none">
     <a class="fixed-plugin-button text-dark position-fixed px-3 py-2">
       <i class="material-icons py-2">settings</i>
@@ -411,6 +408,37 @@
       </div>
     </div>
   </div>
+
+  <div class="position-fixed bottom-1 end-1 z-index-2">
+    <div class="toast fade hide p-2 mt-2 bg-gradient-success" role="alert" aria-live="assertive" id="successToast" aria-atomic="true">
+      <div class="toast-header bg-transparent border-0">
+        <i class="material-icons text-white me-2">
+          check_circle
+        </i>
+        <span class="me-auto text-white font-weight-bold">Success</span>
+        <i class="fas fa-times text-md text-white ms-3 cursor-pointer" data-bs-dismiss="toast" aria-label="Close"></i>
+      </div>
+      <hr class="horizontal light m-0">
+      <div class="toast-body text-white" id="success-toast-message">
+
+      </div>
+    </div>
+    <div class="toast fade hide p-2 mt-2 bg-gradient-danger" role="alert" aria-live="assertive" id="errorToast" aria-atomic="true">
+      <div class="toast-header bg-transparent border-0">
+        <i class="material-icons text-white me-2">
+          error
+        </i>
+        <span class="me-auto text-white font-weight-bold">Error</span>
+
+        <i class="fas fa-times text-md text-white ms-3 cursor-pointer" data-bs-dismiss="toast" aria-label="Close"></i>
+      </div>
+      <hr class="horizontal light m-0">
+      <div class="toast-body text-white" id="error-toast-message">
+
+      </div>
+    </div>
+  </div>
+
 </body>
   <!--   Core JS Files   -->
   <script th:src="@{/js/core/popper.min.js}"></script>
@@ -419,75 +447,10 @@
   <script th:src="@{/js/plugins/perfect-scrollbar.min.js}"></script>
   <script th:src="@{/js/plugins/smooth-scrollbar.min.js}"></script>
   <script th:src="@{/js/plugins/choices.min.js}"></script>
-  <script th:src="@{/js/plugins/dropzone.min.js}"></script>
   <script th:src="@{/js/plugins/quill.min.js}"></script>
-  <script th:src="@{/js/plugins/multistep-form.js}"></script>
-  <script>
-    if (document.getElementById('edit-deschiption')) {
-      var quill = new Quill('#edit-deschiption', {
-        theme: 'snow' // Specify theme in configuration
-      });
-    };
-
-    if (document.getElementById('choices-category')) {
-      var element = document.getElementById('choices-category');
-      const example = new Choices(element, {
-        searchEnabled: false
-      });
-    };
-
-    if (document.getElementById('choices-sizes')) {
-      var element = document.getElementById('choices-sizes');
-      const example = new Choices(element, {
-        searchEnabled: false
-      });
-    };
-
-    if (document.getElementById('choices-currency')) {
-      var element = document.getElementById('choices-currency');
-      const example = new Choices(element, {
-        searchEnabled: false
-      });
-    };
-
-    if (document.getElementById('choices-tags')) {
-      var tags = document.getElementById('choices-tags');
-      const examples = new Choices(tags, {
-        removeItemButton: true
-      });
-
-      examples.setChoices(
-        [{
-            value: 'One',
-            label: 'Expired',
-            disabled: true
-          },
-          {
-            value: 'Two',
-            label: 'Out of Stock',
-            selected: true
-          }
-        ],
-        'value',
-        'label',
-        false,
-      );
-    }
-  </script>
-  <!-- Kanban scripts -->
-
   <script th:src="@{/js/plugins/dragula/dragula.min.js}"></script>
   <script th:src="@{/js/plugins/jkanban/jkanban.js}"></script>
   <script th:src="@{/js/plugins/sweetalert.min.js}"></script>
-  <script>
-    var win = navigator.platform.indexOf('Win') > -1;
-    if (win && document.querySelector('#sidenav-scrollbar')) {
-      var options = {
-        damping: '0.5'
-      }
-      Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
-    }
-  </script>
   <!-- Github buttons -->
   <script async defer src="https://buttons.github.io/buttons.js"></script>
   <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
@@ -498,23 +461,179 @@
    function closeKeyBoard(){
        document.getElementsByClassName('keyboard')[0].classList.add("keyboard--hidden");
    }
-   function gth(){
-     Swal.fire({
-       title: 'Success!',
-       icon:'Product Added Successfully',
-       text: 'Template Cleared',
-       type: 'success',
-       timer: 1500,
-       confirmButtonClass: "btn btn-success",
-       buttonsStyling: false
-     }).catch(swal.noop)
-     // Swal.fire({
-     //   title: "Good job!",
-     //   text: "Template Added Succesfully!",
-     //   buttonsStyling: false,
-     //   confirmButtonClass: "btn btn-success",
-     //   type: "success"
-     // }).catch(swal.noop)
-   }
+
+  </script>
+  <script th:inline="javascript">
+    var categories = [[${categories}]];
+    var customers = [[${customers}]];
+  </script>
+  <script>
+    var products = []
+    var cart = []
+    const cartTable=document.getElementById('cart-table');
+    const productCategoryMenu = document.querySelector('.product-category-menu');
+    for(let cat of categories){
+      for(let prod of cat.products){
+        products.push(prod);
+      }
+    }
+    createCategories();
+    var barcode = "";
+    var interval;
+    console.log(products);
+    document.addEventListener('keydown',function(evt) {
+      if (interval){
+        clearInterval(interval);
+      }
+      if (evt.code == 'Enter') {
+        if (barcode){handleBarcode(barcode);}
+        barcode = "";
+        return;
+      }
+      if (evt.key != "Shift"){
+        barcode += evt.key;
+        interval = setInterval(() => barcode = "", 20);
+      }
+    });
+
+    document.getElementById('search-input').addEventListener('keyup',(e)=>{
+      const value = document.getElementById('search-input').value;
+      let filteredProducts = products.filter((p) => (p.name.toLowerCase().includes(value.toLowerCase()) | (p.barCodeSerial.includes(value))))
+      document.getElementById('menu-back').style.display = 'block';
+      if(filteredProducts.length>1){
+        productCategoryMenu.innerHTML="";
+        for(let prod of filteredProducts){
+          const prodTemplate =  document.createElement('div');
+          let imgPath = `/products-upload/${prod.mainImage.name}`;
+          prodTemplate.className="col-md-3 col-sm-4"
+          prodTemplate.innerHTML =`<div class = "d-flex align-items-start justify-content-start">
+              <img src = "${imgPath}" alt = "" class = "img-fluid pe-3 " style="height:80px">
+          <div>
+            <p class = "mb-0">${prod.name}</p>
+            <span>ksh ${prod.price}</span>
+          </div>
+        </div>`;
+          productCategoryMenu.appendChild(prodTemplate);
+        }
+      }
+      else{
+        createCategories();
+      }
+    });
+
+    function handleBarcode(scanned_barcode){
+      addToCartByBarcode(scanned_barcode);
+    }
+
+    function createCategories(){
+      document.getElementById('menu-title').innerText = 'Categories';
+      document.getElementById('menu-back').style.display = 'none';
+      productCategoryMenu.innerHTML="";
+      for(let cat of categories){
+        const categoryTemplate =  document.createElement('div');
+        categoryTemplate.className="col-md-3 col-sm-4 px-1 pb-1"
+        categoryTemplate.innerHTML =`<div class="card border rounded-0" onclick="createProductCategory(${cat.id})" style="aspect-ratio: 1/1;"><div style="height:100%;display: inline-flex;align-items: center;justify-content: center;"><h5 class="font-weight-bolder mb-0">${cat.name}</h5></div></div>`;
+        productCategoryMenu.appendChild(categoryTemplate);
+      }
+
+    }
+
+    function createProductCategory(catId){
+      productCategoryMenu.innerHTML=``;
+      let category;
+      for(let cat of categories){
+        if(cat.id === catId){
+          category = cat;
+        }
+      }
+      document.getElementById('menu-back').style.display = 'block';
+      document.getElementById('menu-title').innerText=`Products (${category.name})`;
+      for(let prod of category.products){
+        const prodTemplate =  document.createElement('div');
+        let imgPath = `/products-upload/${prod.mainImage.name}`;
+        prodTemplate.className="col-md-3 col-sm-4"
+        prodTemplate.innerHTML =`<div class = "d-flex align-items-start justify-content-start">
+              <img src = "${imgPath}" alt = "" class = "img-fluid pe-3 " style="height:80px">
+          <div>
+            <p class = "mb-0">${prod.name}</p>
+            <span>ksh ${prod.price}</span>
+          </div>
+        </div>`;
+        productCategoryMenu.appendChild(prodTemplate);
+      }
+    }
+
+    function addToCartByBarcode(barcodeSerial){
+      if(cart.length>0){
+        let found = false;
+        for(let prod of cart){
+          if(prod.barCodeSerial === barcodeSerial){
+            prod.quantity= prod.quantity + 1;
+            const amount = prod.price * prod.quantity;
+            document.getElementById(`prod-${prod.id}`).children[1].children[0].innerText= prod.quantity;
+            document.getElementById(`prod-${prod.id}`).children[2].children[0].innerText= `ksh ${amount.toFixed(2)}`;
+            found= true;
+            break;
+          }
+        }
+        if(!found){
+          for(let prod of products){
+            if(prod.barCodeSerial === barcodeSerial){
+              let myProd = createProd(prod)
+              addProdToCartTemplate(myProd);
+              cart.push(myProd);
+            }
+          }
+        }
+      }
+      else{
+        for(let prod of products){
+          if(prod.barCodeSerial === barcodeSerial){
+            let myProd = createProd(prod)
+            addProdToCartTemplate(myProd);
+            cart.push(myProd);
+          }
+        }
+      }
+      const total =  addCart();
+      document.getElementById('cart-total').innerHTML=`${total.toFixed(2)}`;
+    }
+
+    function addCart(){
+      let total = 0;
+      for(let prod of cart){
+        total =  total + (prod.quantity * prod.price);
+      }
+      return total;
+    }
+
+    function createProd(prod){
+      return{
+              id:prod.id,
+              name:prod.name,
+              price :prod.price,
+              quantity :1,
+              barCodeSerial : prod.barCodeSerial,
+            }
+    }
+
+    function addProdToCartTemplate(prod){
+      const row = document.createElement('tr');
+      const amount  =  prod.quantity * prod.price;
+      row.id = `prod-${prod.id}`;
+      row.innerHTML = `<td>
+                        <div class="d-flex px-3 py-1">
+                          <h6 class="mb-0 text-sm">${prod.name}</h6>
+                        </div>
+                        </td>
+                        <td>
+                          <p class="text-center text-sm font-weight-normal mb-0">${prod.quantity}</p>
+                        </td>
+                        <td class="align-middle text-center text-sm">
+                          <p class="text-sm font-weight-normal mb-0">ksh ${amount.toFixed(2)}</p>
+                        </td>`;
+      cartTable.append(row);
+    }
+
   </script>
 </html>

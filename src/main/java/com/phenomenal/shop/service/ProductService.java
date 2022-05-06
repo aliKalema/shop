@@ -91,6 +91,17 @@ public class ProductService {
         productCategory.setTotal(total);
     }
 
+    public List<ProductCategory>getCategoriesWithProduct(){
+        List<ProductCategory> categories = new ArrayList<>();
+        productCategoryRepository.findAll().forEach(categories::add);
+        categories.forEach(category->{
+            for(Product product : category.getProducts()){
+                setProductStructure(product,true);
+            }
+        });
+        return categories;
+    }
+
     public void setProductStructure(Product product,boolean generateMainImage){
         String status = "";
         ProductImage mainImage = null;

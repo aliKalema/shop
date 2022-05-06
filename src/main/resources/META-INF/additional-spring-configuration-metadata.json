@@ -24,5 +24,10 @@
       "name": "pring.http.multipart.resolve-lazily",
       "type": "java.lang.String",
       "description": "Description for pring.http.multipart.resolve-lazily."
+    },
+    {
+      "name": "spring.http.multipart.resolve-lazily",
+      "type": "java.lang.String",
+      "description": "Description for spring.http.multipart.resolve-lazily."
     }
   ] }

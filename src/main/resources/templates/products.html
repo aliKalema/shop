@@ -29,6 +29,12 @@
     body {
       height: 100%;
     }
+    .not-display{
+      display:flex;
+    }
+    .display{
+      display:block;
+    }
   </style>
 </head>
 <body class="g-sidenav-show  bg-gray-200">
@@ -320,25 +326,10 @@
               </div>
             </div>
             <div class="card-body">
-              <ul class="list-group">
-                <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg" th:each="category :${categories}">
-                  <div class="d-flex align-items-center">
-                    <div class="panel-heading" role="tab">
-                      <button  class="btn btn-icon-only btn-rounded btn-outline-success mb-0 me-3 p-3 btn-sm d-flex align-items-center justify-content-center">
-                        <i class="material-icons text-lg">expand_more</i>
-                      </button>
-                    </div>
-                    <div class="d-flex flex-column">
-                      <h6 class="mb-1 text-dark text-sm" th:text="${category.name}"></h6>
-                      <span class="text-xs">Quantity: &nbsp;<i th:text="${category.quantity}"></i></span>
-                    </div>
-                  </div>
-                  <div class="d-flex align-items-center text-success text-gradient text-sm font-weight-bold">
-                    <span th:text="${category.total}"></span>
-                  </div>
-                </li>
+              <ul class="list-group"  id="category-list">
+
               </ul>
-              <button class="btn btn-outline-primary btn-sm mb-0" style="float: right">View All</button>
+              <button onclick="viewAllCategories(this)" data-expand="1" class="btn btn-outline-primary btn-sm mb-0" style="float: right">View All</button>
             </div>
           </div>
         </div>
@@ -347,7 +338,7 @@
     <div class="container-fluid py-4">
       <div class="row">
         <div class="col-12">
-          <div class="card">
+          <div class="card px-4 pb-4">
             <!-- Card header -->
             <div class="card-header pb-0">
               <div class="d-lg-flex">
@@ -375,34 +366,6 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td>
-                        <div class="d-flex">
-                          <div>
-                            <img th:src="@{/img/products/product-details-1.jpg}"  class="avatar avatar-md me-3" alt="table image">
-                          </div>
-                          <h6 class="ms-3 my-auto">Alexander McQueen</h6>
-                        </div>
-                      </td>
-                      <td class="text-sm">Clothing</td>
-                      <td class="text-sm">1199</td>
-                      <td class="text-sm">00121399</td>
-                      <td class="text-sm">51293</td>
-                      <td>
-                        <span class="badge badge-success badge-sm">in Stock</span>
-                      </td>
-                      <td class="text-sm">
-                        <a href="javascript:;" data-bs-toggle="tooltip" data-bs-original-title="Preview product">
-                          <i class="material-icons text-secondary position-relative text-lg">visibility</i>
-                        </a>
-                        <a href="javascript:;" class="mx-3" data-bs-toggle="tooltip" data-bs-original-title="Edit product">
-                          <i class="material-icons text-secondary position-relative text-lg">drive_file_rename_outline</i>
-                        </a>
-                        <a href="javascript:;" data-bs-toggle="tooltip" data-bs-original-title="Delete product">
-                          <i class="material-icons text-secondary position-relative text-lg">delete</i>
-                        </a>
-                      </td>
-                    </tr>
                   </tbody>
                   <tfoot>
                     <tr>
@@ -451,7 +414,6 @@
       </div>
     </div>
   </div>
-
   <div class="fixed-plugin">
     <a class="fixed-plugin-button text-danger position-fixed px-3 py-2" data-bs-toggle="tooltip" data-bs-placement="top" title="CLOSE KEYBOARD"  style="display:none;" id="close-key-board-btn">
       <i class="material-icons py-2">close</i>
@@ -467,19 +429,53 @@
   <script th:src="@{/webjars/datatables/1.11.4/js/jquery.dataTables.js}"></script>
   <script th:src="@{/js/material-dashboard.min.js}"></script>
   <script th:src="@{/js/plugins/keyboard.js}"></script>
-<script th:src="@{/js/plugins/sweetalert.min.js}"></script>
+  <script th:src="@{/js/plugins/sweetalert.min.js}"></script>
   <script th:src="@{/js/plugins/chartjs.min.js}"></script>
-  <script th:inline="javascript">
-    var products = [[${products}]];
-  </script>
-  <!-- Kanban scripts -->
   <script th:src="@{/js/plugins/dragula/dragula.min.js}"></script>
   <script th:src="@{/js/plugins/jkanban/jkanban.js}"></script>
-<script th:inline="javascript">
-  var categories = [[${categories}]];
-  var products = [[${products}]];
-</script>
+  <script th:inline="javascript">
+    var categories = [[${categories}]];
+    var products = [[${products}]];
+  </script>
+  <script>
+    function errorNotify(message){
+      document.getElementById('error-toast-message').innerText = message;
+      $('#errorToast').toast('show');
+    }
+    function successNotify(message){
+      document.getElementById('success-toast-message').innerText = message;
+      $('#successToast').toast('show');
+    }
+  </script>
 <script>
+  createChart();
+  for(let i =0;i<categories.length;i++){
+    let categoryTemplate =document.createElement('li');
+    let category =  categories[i];
+    categoryTemplate.className="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg";
+    categoryTemplate.innerHTML=`<div class="d-flex align-items-center">
+                    <div class="panel-heading " style="padding: 10px;" role="tab">
+                        <a href="javascript:;" class="nav-link text-body p-0 position-relative" data-bs-toggle="dropdown" aria-expanded="false">
+                          <i class="material-icons cursor-pointer">more_vert</i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end p-2 me-sm-n4" aria-labelledby="dropdownMenuButton">
+                          <li class="mb-2">delete</li>
+                          <li class="mb-2">edit</li>
+                        </ul>
+                    </div>
+                    <div class="d-flex flex-column">
+                      <h6 class="mb-1 text-dark text-sm">${category.name}</h6>
+                      <span class="text-xs">Quantity: &nbsp;<i >${category.quantity}</i></span>
+                    </div>
+                  </div>
+                  <div class="d-flex align-items-center text-success text-gradient text-sm font-weight-bold">
+                    <span>${category.total}</span>
+                  </div>`
+    document.getElementById('category-list').appendChild(categoryTemplate);
+    if(i>1){
+      categoryTemplate.classList.add('d-none');
+    }
+  }
   $('products-list').DataTable({
     "sDom": 'lrtip',
     "lengthMenu": [ [-1, 500, 200,100, 50], ["All", 500, 200, 100, 50] ],
@@ -516,61 +512,6 @@
       `<td class="text-sm"><a onclick="viewProduct( ${product.id} )" data-bs-toggle="tooltip" data-bs-original-title="Preview product"><i class="material-icons text-secondary position-relative text-lg">visibility</i></a><a onclick="editProduct(${product.id})" class="mx-3" data-bs-toggle="tooltip" data-bs-original-title="Edit product"><i class="material-icons text-secondary position-relative text-lg">drive_file_rename_outline</i></a><a onclick="deleteProduct(${product.id},this)" data-bs-toggle="tooltip" data-bs-original-title="Delete product"><i class="material-icons text-secondary position-relative text-lg">delete</i></a></td>`
     ]).draw();
   }
-  var ctx4 = document.getElementById("pie-chart").getContext("2d");
-  new Chart(ctx4, {
-    type: "pie",
-    data: {
-      labels: ['Facebook', 'Direct', 'Organic', 'Referral'],
-      datasets: [{
-        label: "Projects",
-        weight: 9,
-        cutout: 0,
-        tension: 0.9,
-        pointRadius: 2,
-        borderWidth: 2,
-        backgroundColor: ['#03A9F4', '#e91e63', '#3A416F', '#a8b8d8'],
-        data: [15, 20, 12, 60],
-        fill: false
-      }],
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: {
-        legend: {
-          display: false,
-        }
-      },
-      interaction: {
-        intersect: false,
-        mode: 'index',
-      },
-      scales: {
-        y: {
-          grid: {
-            drawBorder: false,
-            display: false,
-            drawOnChartArea: false,
-            drawTicks: false,
-          },
-          ticks: {
-            display: false
-          }
-        },
-        x: {
-          grid: {
-            drawBorder: false,
-            display: false,
-            drawOnChartArea: false,
-            drawTicks: false,
-          },
-          ticks: {
-            display: false,
-          }
-        },
-      },
-    },
-  });
 
   document.getElementById('add-category-form').addEventListener('submit',addCategory);
 
@@ -580,6 +521,30 @@
 
   function editProduct(id){
     window.location.href=`/admin/product/edit/${id}`;
+  }
+
+  function viewAllCategories(element){
+    const categoryList= document.getElementById('category-list');
+    if (element.dataset.expand === "0"){
+      element.dataset.expand = "1";
+      element.innerText="VIEW ALL";
+      for(let i = 0;i<categoryList.children.length;i++){
+        if(i>1){
+          categoryList.children[i].classList.add('d-none');
+          categoryList.children[i].classList.remove('d-block');
+        }
+      }
+    }
+    else if (element.dataset.expand === "1"){
+      element.dataset.expand = "0";
+      element.innerText="MINIMIZE";
+      for(let i = 0;i<categoryList.children.length;i++){
+        if(i>1){
+          categoryList.children[i].classList.remove('d-none');
+          categoryList.children[i].classList.add('d-block');
+        }
+      }
+    }
   }
 
   function deleteProduct(id,element){
@@ -593,7 +558,7 @@
       confirmButtonText: 'Yes, delete it!'
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`/api/v1/admin/products/{id}/${id}`,{
+        fetch(`/api/v1/admin/products/${id}`,{
           method:'DELETE'
         }).then(function(res){
           if(!res.ok){
@@ -631,7 +596,28 @@
       }
       return res.json();
     }).then(function(category){
-      successNotify("Category Added")
+      let categoryTemplate =document.createElement('li');
+      categoryTemplate.className="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg";
+      categoryTemplate.innerHTML=`<div class="d-flex align-items-center">
+                    <div class="panel-heading " style="padding: 10px;" role="tab">
+                        <a href="javascript:;" class="nav-link text-body p-0 position-relative" data-bs-toggle="dropdown" aria-expanded="false">
+                          <i class="material-icons cursor-pointer">more_vert</i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end p-2 me-sm-n4" aria-labelledby="dropdownMenuButton">
+                          <li class="mb-2">delete</li>
+                          <li class="mb-2">edit</li>
+                        </ul>
+                    </div>
+                    <div class="d-flex flex-column">
+                      <h6 class="mb-1 text-dark text-sm">${category.name}</h6>
+                      <span class="text-xs">Quantity: &nbsp;<i >${category.quantity}</i></span>
+                    </div>
+                  </div>
+                  <div class="d-flex align-items-center text-success text-gradient text-sm font-weight-bold">
+                    <span>${category.total}</span>
+                  </div>`
+      document.getElementById('category-list').appendChild(categoryTemplate);
+      successNotify("Category Added");
     });
   }
 
@@ -650,6 +636,72 @@
 
   function generateRandomColor(){
     return "#"+(Math.floor(Math.random()*16777215).toString(16)).toString();
+  }
+
+  function createChart(){
+    const categoryNames=[];
+    const colors=[];
+    const categoryValue=[];
+    for(let category of categories){
+      categoryNames.push(category.name);
+      colors.push(generateRandomColor());
+      categoryValue.push(category.total);
+    }
+    var ctx4 = document.getElementById("pie-chart").getContext("2d");
+    new Chart(ctx4, {
+      type: "pie",
+      data: {
+        labels: categoryNames,
+        datasets: [{
+          label: "Projects",
+          weight: 9,
+          cutout: 0,
+          tension: 0.9,
+          pointRadius: 2,
+          borderWidth: 2,
+          backgroundColor: colors,
+          data: categoryValue,
+          fill: false
+        }],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            display: false,
+          }
+        },
+        interaction: {
+          intersect: false,
+          mode: 'index',
+        },
+        scales: {
+          y: {
+            grid: {
+              drawBorder: false,
+              display: false,
+              drawOnChartArea: false,
+              drawTicks: false,
+            },
+            ticks: {
+              display: false
+            }
+          },
+          x: {
+            grid: {
+              drawBorder: false,
+              display: false,
+              drawOnChartArea: false,
+              drawTicks: false,
+            },
+            ticks: {
+              display: false,
+            }
+          },
+        },
+      },
+    });
   }
 
 </script>

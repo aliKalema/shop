@@ -140,9 +140,9 @@
               </a>
             </li>
             <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" th:href="@{/admin/product}">Products</a></li>
-            <li class="breadcrumb-item text-sm text-dark active" aria-current="page">New</li>
+            <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Edit</li>
           </ol>
-          <h6 class="font-weight-bolder mb-0">New Product</h6>
+          <h6 class="font-weight-bolder mb-0">Edit Product</h6>
         </nav>
         <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
           <div class="ms-md-auto pe-md-3 d-flex align-items-center">
@@ -492,6 +492,7 @@
                     let callback = null;
                     let crossOrigin = null;
                     let resizeThumbnail = true;
+                    myDropzone.files.push(file);
                     myDropzone.displayExistingFile(file, url, callback, crossOrigin, resizeThumbnail);
                   })
                   .catch( function(err){
@@ -520,6 +521,7 @@
                       let callback = null;
                       let crossOrigin = null;
                       let resizeThumbnail = true;
+                      myDropzone.files.push(file);
                       myDropzone.displayExistingFile(file, url, callback, crossOrigin, resizeThumbnail);
                     })
                     .catch( function(err){
@@ -546,80 +548,75 @@
       document.getElementById('save-btn').addEventListener('click', submitProduct);
     });
 
-    function submitProduct(e) {
-      const mainImg = Dropzone.forElement("#mainImg");
-      console.log(mainImg);
+    function submitProduct(e){
+      e.preventDefault();
+      const name =  document.getElementById('name');
+      const price =  document.getElementById('price');
+      const quantity =  document.getElementById('quantity');
+      const minQuantity =  document.getElementById('min-quantity');
+      const category =  document.getElementById('category');
+      const description = document.getElementById('description');
+      const barcodeNumber =  document.getElementById('barcode-number');
+      const autoGenerateBarCode = document.getElementById('auto-generate-barcode');
+      const files= [];
+      let mainImgName="";
+      const formData = new FormData();
+      formData.append("name",name.value);
+      formData.append("price",price.value);
+      formData.append("quantity",quantity.value);
+      formData.append("minQuantity",minQuantity.value);
+      formData.append("categoryId",category.value);
+      formData.append("description",description.value);
+      if(autoGenerateBarCode.checked){
+        formData.append("generate",true);
+        formData.append("barcode","");
+      }
+      else{
+        formData.append("generate",false);
+        formData.append("barcode",barcodeNumber.value);
+      }
+      if(Dropzone.forElement("#mainImg").files.length>0){
+        const mainImg = Dropzone.forElement("#mainImg").files[0];
+        structureFile(mainImg);
+        formData.append("files",mainImg);
+        mainImgName = mainImg.name;
+      }
+      if(Dropzone.forElement("#additionalImgs").files.length>0){
+        const additionalImgs = Dropzone.forElement("#additionalImgs").files;
+        for(let img of additionalImgs){
+          structureFile(img);
+          formData.append("files",img);
+        }
+      }
+      formData.append("mainImgName",mainImgName);
+      fetch(`/api/v1/admin/products/${product.id}`,{
+        method:'PUT',
+        body:formData
+      }).then(function(res){
+        if(res.status === 409){
+          displayProductExist(res);
+          throw new Error(res.statusText);
+        }
+        else if(!res.ok){
+          errorNotify("Something Went Wrong");
+          throw new Error(res.statusText);
+        }
+        return res.json();
+      })
+      .then(function(product){
+        Swal.fire({
+          title: 'Success!',
+          icon:'Product Added Successfully',
+          text: 'Template Cleared',
+          type: 'success',
+          timer: 1500,
+          confirmButtonClass: "btn btn-success",
+          buttonsStyling: false
+        }).catch(swal.noop)
+      }).then(function(){
+        window.location.href="/admin/product";
+      })
     }
-
-    // function submitProduct(e){
-    //   e.preventDefault();
-    //   const name =  document.getElementById('name');
-    //   const price =  document.getElementById('price');
-    //   const quantity =  document.getElementById('quantity');
-    //   const minQuantity =  document.getElementById('min-quantity');
-    //   const category =  document.getElementById('category');
-    //   const description = document.getElementById('description');
-    //   const barcodeNumber =  document.getElementById('barcode-number');
-    //   const autoGenerateBarCode = document.getElementById('auto-generate-barcode');
-    //   const files= [];
-    //   let mainImgName="";
-    //   const formData = new FormData();
-    //   formData.append("name",name.value);
-    //   formData.append("price",price.value);
-    //   formData.append("quantity",quantity.value);
-    //   formData.append("minQuantity",minQuantity.value);
-    //   formData.append("categoryId",category.value);
-    //   formData.append("description",description.value);
-    //   if(autoGenerateBarCode.checked){
-    //     formData.append("generate",true);
-    //     formData.append("barcode","");
-    //   }
-    //   else{
-    //     formData.append("generate",false);
-    //     formData.append("barcode",barcodeNumber.value);
-    //   }
-    //   if(Dropzone.forElement("#mainImg").files.length>0){
-    //     const mainImg = Dropzone.forElement("#mainImg").files[0];
-    //     structureFile(mainImg);
-    //     formData.append("files",mainImg);
-    //     mainImgName = mainImg.name;
-    //   }
-    //   if(Dropzone.forElement("#additionalImgs").files.length>0){
-    //     const additionalImgs = Dropzone.forElement("#additionalImgs").files;
-    //     for(let img of additionalImgs){
-    //       structureFile(img);
-    //       formData.append("files",img);
-    //     }
-    //   }
-    //   formData.append("mainImgName",mainImgName);
-    //   fetch("/api/v1/admin/products",{
-    //     method:'POST',
-    //     body:formData
-    //   }).then(function(res){
-    //     if(res.status === 409){
-    //       displayProductExist(res);
-    //       throw new Error(res.statusText);
-    //     }
-    //     else if(!res.ok){
-    //       errorNotify("Something Went Wrong");
-    //       throw new Error(res.statusText);
-    //     }
-    //     return res.json();
-    //   })
-    //   .then(function(product){
-    //     Swal.fire({
-    //       title: 'Success!',
-    //       icon:'Product Added Successfully',
-    //       text: 'Template Cleared',
-    //       type: 'success',
-    //       timer: 1500,
-    //       confirmButtonClass: "btn btn-success",
-    //       buttonsStyling: false
-    //     }).catch(swal.noop)
-    //   }).then(function(){
-    //     window.location.href="/admin/product";
-    //   })
-    // }
 
     function addOption(optionValue) {
       const option = document.createElement("option");

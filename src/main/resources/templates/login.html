@@ -131,6 +131,7 @@
 </script>
 <script>
   document.getElementById('login-form').addEventListener('submit',login);
+
   function login(e){
     e.preventDefault();
     const form = document.getElementById('login-form');
@@ -159,6 +160,7 @@
     })
 
   }
+
   function errorNotify(message){
     document.getElementById('error-toast-message').innerText = message;
     $('#errorToast').toast('show');
