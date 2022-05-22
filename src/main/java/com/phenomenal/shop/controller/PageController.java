@@ -18,6 +18,7 @@ import java.util.Optional;
 public record PageController(UserService userSettingsService,
                              ProductService productService,
                              SalesService salesService,
+                             UserService userService,
                              CustomerService customerService) {
     @GetMapping("/login")
     public ModelAndView loginPage(){
@@ -49,6 +50,14 @@ public record PageController(UserService userSettingsService,
         mav.addObject("user",userSettingsService.getUserSettings(authentication));
         mav.addObject("sales",salesService.getAllSales());
         mav.addObject("categories",productService.getAllProductCategories());
+        return mav;
+    }
+
+    @GetMapping("/admin/user")
+    public ModelAndView usersPage(Authentication authentication){
+        ModelAndView mav =  SystemUtils.createMav("users");
+        mav.addObject("user",userSettingsService.getUserSettings(authentication));
+        mav.addObject("users",userService.getAllUsers());
         return mav;
     }
     

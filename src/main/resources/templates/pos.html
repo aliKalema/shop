@@ -42,8 +42,9 @@
       <ul class="navbar-nav">
         <li class="nav-item mb-2 mt-0">
           <a data-bs-toggle="collapse" href="#ProfileNav" class="nav-link text-white" aria-controls="ProfileNav" role="button" aria-expanded="false">
-            <img th:src="@{/img/team-3.jpg}" class="avatar">
-            <span class="nav-link-text ms-2 ps-1">Brooklyn Alice</span>
+<!--           <img th:src="@{/img/team-3.jpg}" class="avatar">-->
+            <div class="img-text" style="min-width: 35px;height:35px; border-radius:50%;"><i class="material-icons" style="font-size:16px;padding:0px;color:#ffffff">AD</i></div>
+            <span class="nav-link-text ms-2 ps-1" th:text="${user.username}"></span>
           </a>
           <div class="collapse" id="ProfileNav" style="">
             <ul class="nav ">
@@ -119,7 +120,7 @@
                 <div class="ms-md-auto pe-md-3 d-flex align-items-center">
                   <div class="input-group input-group-outline">
                     <label class="form-label">Search</label>
-                    <input type="text" id="search-input" class="form-control" onfocus="focused(this)" onfocusout="defocused(this)">
+                    <input type="text" id="search-input" class="use-keyboard-input form-control" onfocus="focused(this)" onfocusout="defocused(this)">
                   </div>
                 </div>
                 <ul class="navbar-nav  justify-content-end">
@@ -156,149 +157,42 @@
           </div>
           <div class="product-category-menu row px-2"></div>
         </div>
+        <div class="category-main-separator"></div>
       </div>
-      <div class="category-main-separator"></div>
-      <div class="right-bar-container nav-tabs-grid">
-<!--        <div class="nav-wrapper position-relative end-0 nav-tabs-grid-header">-->
-<!--          <ul class="nav nav-pills nav-fill p-1" role="tablist">-->
-<!--            <li class="nav-item" style="height:60px;">-->
-<!--              <a class="nav-link mb-0 px-0 py-1 active" data-bs-toggle="tab" href="#sales-tab-content" role="tab" aria-controls="preview" aria-selected="true" style="height:60px;">-->
-<!--                <div class="nav-link-icon-label">-->
-<!--                  <span class="material-icons align-middle mb-1">-->
-<!--                  shopping_bag-->
-<!--                  </span>-->
-<!--                  <h6 class="align-middle mb-1">Sale</h6>-->
-<!--                </div>-->
-<!--              </a>-->
-<!--            </li>-->
-<!--            <li class="nav-item" style="height:60px;">-->
-<!--              <a class="nav-link mb-0 px-0 py-1" data-bs-toggle="tab" href="#dash-tabs-icons" role="tab" aria-controls="code" aria-selected="false" style="height:60px;">-->
-<!--                <div class="nav-link-icon-label">-->
-<!--                  <span class="material-icons align-middle mb-1">-->
-<!--                  hourglass_disabled-->
-<!--                  </span>-->
-<!--                  <h6 class="align-middle mb-1">Onhold</h6>-->
-<!--                </div>-->
-<!--              </a>-->
-<!--            </li>-->
-<!--            <li class="nav-item">-->
-<!--              <a class="nav-link mb-0 px-0 py-1" data-bs-toggle="tab" href="#dashboard-tabs-icons" role="tab" aria-controls="code" aria-selected="false">-->
-<!--                <div class="nav-link-icon-label">-->
-<!--                  <span class="material-icons align-middle mb-1">-->
-<!--                  face-->
-<!--                  </span>-->
-<!--                  <h6 class="align-middle mb-1">Customers</h6>-->
-<!--                </div>-->
-<!--              </a>-->
-<!--            </li>-->
-<!--          </ul>-->
-<!--        </div>-->
-<!--        <div class="tab-content nav-tabs-grid-content" id="myTabContent">-->
-<!--          <div class="tab-pane fade show active my-tab-pane" id="sales-tab-content" role="tabpanel" aria-labelledby="home-tab">-->
-<!--              <div class="product-quantity-table">-->
-<!--                <div class="table-responsive  product-table p-0" >-->
-<!--                  <table class="table align-items-center mb-0">-->
-<!--                    <thead>-->
-<!--                    <tr>-->
-<!--                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Product</th>-->
-<!--                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Quantity</th>-->
-<!--                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Amount</th>-->
-<!--                    </tr>-->
-<!--                    </thead>-->
-<!--                    <tbody id="cart-table">-->
-<!--                    </tbody>-->
-<!--                  </table>-->
-<!--                </div>-->
-<!--                <div class="calculator-container">-->
-<!--                  <div class="total-container">-->
-
-<!--                  </div>-->
-<!--                  <div class="calculator-wrapper">-->
-<!--                    <div class="num-input-container">-->
-<!--                      <div class="cal-num">7</div>-->
-<!--                      <div class="cal-num">8</div>-->
-<!--                      <div class="cal-num">9</div>-->
-<!--                      <div class="cal-num">4</div>-->
-<!--                      <div class="cal-num">5</div>-->
-<!--                      <div class="cal-num">6</div>-->
-<!--                      <div class="cal-num">1</div>-->
-<!--                      <div class="cal-num">2</div>-->
-<!--                      <div class="cal-num">3</div>-->
-<!--                      <div class="cal-num">-</div>-->
-<!--                      <div class="cal-num">0</div>-->
-<!--                      <div class="cal-num">.</div>-->
-<!--                    </div>-->
-<!--                    <div class="total-paid-bal-container">-->
-<!--                      <div class="total-paid-container">-->
-<!--                        <div class="mb-1 text-dark text-lg font-weight-bold">Total</div>-->
-<!--                        <div id="cart-total" class="d-flex align-items-center text-dark text-gradient text-lg font-weight-bold">-->
-<!--                           0.00-->
-<!--                        </div>-->
-<!--                      </div>-->
-<!--                      <div class="total-paid-container">-->
-<!--                        <div class="mb-1 text-dark text-lg font-weight-bold">Cash</div>-->
-<!--                        <div id="cash-payment" class="d-flex align-items-center text-dark text-gradient text-lg font-weight-bold">-->
-<!--                           0.00-->
-<!--                        </div>-->
-<!--                      </div>-->
-<!--                      <div class="total-paid-container">-->
-<!--                        <div class="mb-1 text-dark text-lg font-weight-bold">Balance</div>-->
-<!--                        <div id="cash-balance" class="d-flex align-items-center text-success text-gradient text-lg font-weight-bold">-->
-<!--                           0.00-->
-<!--                        </div>-->
-<!--                      </div>-->
-<!--                      <button type="button" class="btn btn-info" style="width:100%">Pay</button>-->
-<!--                    </div>-->
-<!--                  </div>-->
-<!--                  <div  style="padding-top:7px;display:flex;justify-content: space-between;width:96%;">-->
-<!--                      <div><button type="button" onclick="gth()" class="btn btn-secondary">Print</button></div>-->
-<!--                      <div><button type="button" class="btn btn-success">Onhold</button></div>-->
-<!--                      <div><button type="button" class="btn btn-warning">Discount</button></div>-->
-<!--                      <div><button type="button" class="btn btn-danger">Cancel</button></div>-->
-<!--                  </div>-->
-<!--                </div>-->
-<!--              </div>-->
-<!--            </div>-->
-<!--          <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">kkkkkkk</div>-->
-<!--          <div class="tab-pane fade" id="dash-tabs-icons" role="tabpanel" aria-labelledby="contact-tab">lllplp</div>-->
-<!--        </div>-->
-        <div class="tab-content nav-tabs-grid-content">
-          <div class="position-relative">
-          <div class="my-tab-pane">
-            <div class="product-quantity-table">
-              <div class="table-responsive  product-table p-0" >
-                <table class="table align-items-center mb-0">
-                  <thead>
-                  <tr>
-                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Product</th>
-                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Quantity</th>
-                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Amount</th>
-                  </tr>
-                  </thead>
-                  <tbody id="cart-table">
-                  </tbody>
-                </table>
+      <div class="category-right-container">
+        <div class="products-calc-wrapper">
+          <div class="table-responsive  product-table card p-0">
+            <table class="table align-items-center mb-0">
+              <thead>
+              <tr class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                <th><span class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Product</span></th>
+                <th class="text-center"><span class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Quantity</span></th>
+                <th class="text-center"><span class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Amount</span></th>
+              </tr>
+              </thead>
+              <tbody id="cart-table">
+              </tbody>
+            </table>
+          </div>
+          <div class="calculator-container">
+            <div class="total-container"></div>
+            <div class="calculator-wrapper">
+              <div class="num-input-container">
+                <div class="cal-num" onclick="inputCalKey('7')">7</div>
+                <div class="cal-num" onclick="inputCalKey('8')">8</div>
+                <div class="cal-num" onclick="inputCalKey('9')">9</div>
+                <div class="cal-num" onclick="inputCalKey('4')">4</div>
+                <div class="cal-num" onclick="inputCalKey('5')">5</div>
+                <div class="cal-num" onclick="inputCalKey('6')">6</div>
+                <div class="cal-num" onclick="inputCalKey('1')">1</div>
+                <div class="cal-num" onclick="inputCalKey('2')">2</div>
+                <div class="cal-num" onclick="inputCalKey('3')">3</div>
+                <div class="cal-num"><span class="material-icons" onclick="calcBackSpace()">backspace</span></div>
+                <div class="cal-num" onclick="inputCalKey('0')">0</div>
+                <div class="cal-num" onclick="inputCalKey('.')">.</div>
               </div>
-              <div class="calculator-container">
-                <div class="total-container">
-
-                </div>
-                <div class="calculator-wrapper">
-                  <div class="num-input-container">
-                    <div class="cal-num">7</div>
-                    <div class="cal-num">8</div>
-                    <div class="cal-num">9</div>
-                    <div class="cal-num">4</div>
-                    <div class="cal-num">5</div>
-                    <div class="cal-num">6</div>
-                    <div class="cal-num">1</div>
-                    <div class="cal-num">2</div>
-                    <div class="cal-num">3</div>
-                    <div class="cal-num">-</div>
-                    <div class="cal-num">0</div>
-                    <div class="cal-num">.</div>
-                  </div>
-                  <div class="total-paid-bal-container">
+              <div class="total-paid-bal-container ">
+                <div class="card mb-1" style="padding:5px;">
                     <div class="total-paid-container">
                       <div class="mb-1 text-dark text-lg font-weight-bold">Total</div>
                       <div id="cart-total" class="d-flex align-items-center text-dark text-gradient text-lg font-weight-bold">
@@ -317,97 +211,24 @@
                         0.00
                       </div>
                     </div>
-                    <button type="button" class="btn btn-info" style="width:100%">Pay</button>
-                  </div>
                 </div>
-                <div  style="padding-top:7px;display:flex;justify-content: space-between;width:96%;">
-                  <div><button type="button" onclick="gth()" class="btn btn-secondary">Print</button></div>
-                  <div><button type="button" class="btn btn-success">Onhold</button></div>
-                  <div><button type="button" class="btn btn-warning">Discount</button></div>
-                  <div><button type="button" class="btn btn-danger">Cancel</button></div>
+                <div class="mt-2" style="width:100%;">
+                  <div style="display:flex;justify-content:space-between;">
+                    <button type="button" class="btn btn-info"  style="width:107px">Pay</button>
+                    <button type="button" class="btn btn-danger" style="width:107px">Cancel</button>
+                  </div>
+                  <div style="display:flex;justify-content:space-between;">
+                    <button type="button" class="btn btn-secondary" style="width:107px">Discount</button>
+                    <button type="button" class="btn btn-success" style="width:107px">Onhold</button>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        </div>
       </div>
     </div>
   </main>
-  <div class="fixed-plugin">
-      <a class="fixed-plugin-button text-danger position-fixed px-3 py-2" data-bs-toggle="tooltip" data-bs-placement="top" title="CLOSE KEYBOARD"  style="display:none;" id="close-key-board-btn">
-          <i class="material-icons py-2">close</i>
-      </a>
-  </div>
-
-  <div class="fixed-plugin" style="display: none">
-    <a class="fixed-plugin-button text-dark position-fixed px-3 py-2">
-      <i class="material-icons py-2">settings</i>
-    </a>
-    <div class="card shadow-lg">
-      <div class="card-header pb-0 pt-3">
-        <div class="float-start">
-          <h5 class="mt-3 mb-0">Material UI Configurator</h5>
-          <p>See our dashboard options.</p>
-        </div>
-        <div class="float-end mt-4">
-          <button class="btn btn-link text-dark p-0 fixed-plugin-close-button">
-            <i class="material-icons">clear</i>
-          </button>
-        </div>
-        <!-- End Toggle Button -->
-      </div>
-      <hr class="horizontal dark my-1">
-      <div class="card-body pt-sm-3 pt-0">
-        <!-- Sidebar Backgrounds -->
-        <div>
-          <h6 class="mb-0">Sidebar Colors</h6>
-        </div>
-        <a href="javascript:void(0)" class="switch-trigger background-color">
-          <div class="badge-colors my-2 text-start">
-            <span class="badge filter bg-gradient-primary active" data-color="primary" onclick="sidebarColor(this)"></span>
-            <span class="badge filter bg-gradient-dark" data-color="dark" onclick="sidebarColor(this)"></span>
-            <span class="badge filter bg-gradient-info" data-color="info" onclick="sidebarColor(this)"></span>
-            <span class="badge filter bg-gradient-success" data-color="success" onclick="sidebarColor(this)"></span>
-            <span class="badge filter bg-gradient-warning" data-color="warning" onclick="sidebarColor(this)"></span>
-            <span class="badge filter bg-gradient-danger" data-color="danger" onclick="sidebarColor(this)"></span>
-          </div>
-        </a>
-        <!-- Sidenav Type -->
-        <div class="mt-3">
-          <h6 class="mb-0">Sidenav Type</h6>
-          <p class="text-sm">Choose between 2 different sidenav types.</p>
-        </div>
-        <div class="d-flex">
-          <button class="btn bg-gradient-dark px-3 mb-2 active" data-class="bg-gradient-dark" onclick="sidebarType(this)">Dark</button>
-          <button class="btn bg-gradient-dark px-3 mb-2 ms-2" data-class="bg-transparent" onclick="sidebarType(this)">Transparent</button>
-          <button class="btn bg-gradient-dark px-3 mb-2 ms-2" data-class="bg-white" onclick="sidebarType(this)">White</button>
-        </div>
-        <p class="text-sm d-xl-none d-block mt-2">You can change the sidenav type just on desktop view.</p>
-        <!-- Navbar Fixed -->
-        <div class="mt-3 d-flex">
-          <h6 class="mb-0">Navbar Fixed</h6>
-          <div class="form-check form-switch ps-0 ms-auto my-auto">
-            <input class="form-check-input mt-1 ms-auto" type="checkbox" id="navbarFixed" onclick="navbarFixed(this)">
-          </div>
-        </div>
-        <hr class="horizontal dark my-3">
-        <div class="mt-2 d-flex">
-          <h6 class="mb-0">Sidenav Mini</h6>
-          <div class="form-check form-switch ps-0 ms-auto my-auto">
-            <input class="form-check-input mt-1 ms-auto" type="checkbox" id="navbarMinimize" onclick="navbarMinimize(this)">
-          </div>
-        </div>
-        <hr class="horizontal dark my-3">
-        <div class="mt-2 d-flex">
-          <h6 class="mb-0">Light / Dark</h6>
-          <div class="form-check form-switch ps-0 ms-auto my-auto">
-            <input class="form-check-input mt-1 ms-auto" type="checkbox" id="dark-version" onclick="darkMode(this)">
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
 
   <div class="position-fixed bottom-1 end-1 z-index-2">
     <div class="toast fade hide p-2 mt-2 bg-gradient-success" role="alert" aria-live="assertive" id="successToast" aria-atomic="true">
@@ -439,6 +260,138 @@
     </div>
   </div>
 
+  <div class="fixed-plugin">
+    <div class="card shadow-lg">
+      <div class="card-header pb-0 pt-3">
+        <div class="float-start">
+          <h5 class="mt-3 mb-0">Settings</h5>
+        </div>
+      </div>
+      <div class="row gx-4 mb-2 mt-2">
+        <div class="col-auto">
+          <div class="avatar avatar-xl position-relative">
+            <div class="border-radius-lg shadow-sm img-text" style="width: 60px;height:60px;"><i class="material-icons" style="font-size:28px;padding:0px;">AD</i></div>
+<!--            <img src="/img/team-3.jpg" alt="profile_image" class="w-100 border-radius-lg shadow-sm">-->
+          </div>
+        </div>
+        <div class="col-auto my-auto">
+          <div class="h-80">
+            <h5 class="mb-1" th:text="${user.username}"></h5>
+          </div>
+        </div>
+        <div class="col-12 mt-1 mb-1" style="display:flex;justify-content: center;width:100%">
+          <button class="btn bg-gradient-primary mb-0 ms-2text-uppercase text-white text-xxs font-weight-bolder " type="button" name="button" onclick="openModal('lock-modal')">Update Password</button>
+        </div>
+      </div>
+      <hr>
+      <hr class="horizontal dark my-1">
+      <div class="card-body pt-sm-3 pt-0">
+        <hr class="horizontal dark my-3">
+        <div class="mt-2 d-flex">
+          <h6 class="mb-0">Minimize SideNav</h6>
+          <div class="form-check form-switch ps-0 ms-auto my-auto">
+            <input class="form-check-input mt-1 ms-auto" type="checkbox" id="navbarMinimize" onclick="navbarMinimize(this)">
+          </div>
+        </div>
+        <hr class="horizontal dark my-3">
+        <div class="mt-2 d-flex">
+          <h6 class="mb-0">Light / Dark</h6>
+          <div class="form-check form-switch ps-0 ms-auto my-auto">
+            <input class="form-check-input mt-1 ms-auto" type="checkbox" id="dark-version" onclick="darkMode(this)">
+          </div>
+        </div>
+        <hr class="horizontal dark my-sm-4">
+          <div class="mt-2 d-flex">
+              <h6 class="mb-0">Touch Mode</h6>
+              <div class="form-check form-switch ps-0 ms-auto my-auto">
+                  <input class="form-check-input mt-1 ms-auto" type="checkbox" id="touch-version" onclick="touchMode(this)">
+              </div>
+          </div>
+          <hr class="horizontal dark my-sm-4">
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="add-product-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Add Product to Cart</h5>
+          <button type="button" class=" btn  btn-link" onclick="closeModal('add-product-modal')">
+            <span class="material-icons text-dark" style="">close</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="add-product-container">
+              <div class="add-product-image-container">
+                <img src="" alt="" class="img-fluid pe-3 " id="add-prod-img" style="height:110px">
+              </div>
+              <div class="add-product-wrapper">
+                <div class="d-flex mb-4">
+                  <div class="d-flex align-items-center">
+                    <div class="d-flex flex-column">
+                      <h6 class="mb-1 text-dark text-sm">Name</h6>
+                      <span class="text-xs" id="add-prod-name"></span>
+                    </div>
+                  </div>
+                  <div class="d-flex align-items-center text-success text-gradient text-sm font-weight-bold ms-auto pt-4" id="add-prod-price">
+                  </div>
+                </div>
+                <div class="input-group input-group-outline mb-4 focused is-focused">
+                  <label class="form-label">Quantity</label>
+                  <input type="text" class="form-control focused" id="add-prod-quantity">
+                </div>
+              </div>
+            </div>
+            <div style="width:100%;display:flex;justify-content: end">
+              <button type="button" class="btn btn-secondary" onclick="closeModal('add-product-modal')">Close</button>
+              <button type="button" class="btn btn-primary" style="margin-left:25px;" onclick="submitProductToCart()">Submit</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel" id="lock-modal">
+    <div class="modal-dialog modal-sm" role="document">
+      <div class="modal-content">
+        <div class="modal-body" >
+          <div style="display:flex;justify-content: center;margin-top:-70px">
+            <a href="#pablo">
+              <img class="avatar" style="height:100px;width: 80px" src="" alt="...">
+            </a>
+          </div>
+          <form id="lock-form">
+            <div class="row">
+              <div class="col-md-12" style="display: flex;justify-content:center;">
+                <h4 class="card-title" th:text="${user.username}"></h4>
+              </div>
+              <div class="col-md-12">
+                <div class="input-group input-group-dynamic mb-3">
+                  <label class="form-label">Current Password</label>
+                  <input type="text" class="form-control" id="current-password" onfocus="focused(this)" onfocusout="defocused(this)" required>
+                </div>
+                <div class="input-group input-group-dynamic mb-3">
+                  <label class="form-label">New Password <small> (minimum 4 characters)</small></label>
+                  <input type="text" id="new-password" class="form-control secure" autocomplete="off" onfocus="focused(this)" onfocusout="defocused(this)" required>
+                </div>
+                <div class="input-group input-group-dynamic mb-3">
+                  <label class="form-label">Confirm New Password</label>
+                  <input type="text" id="confirm-password" class="form-control secure" autocomplete="off" onfocus="focused(this)" onfocusout="defocused(this)" required>
+                </div>
+              </div>
+              <div class="col-md-12" style="display: flex;justify-content: center">
+                <button  id="submit-password" class="btn btn-primary btn-round" style="color:#ffffff">Submit</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </body>
   <!--   Core JS Files   -->
   <script th:src="@{/js/core/popper.min.js}"></script>
@@ -466,11 +419,23 @@
   <script th:inline="javascript">
     var categories = [[${categories}]];
     var customers = [[${customers}]];
+    var user =[[${user}]]
   </script>
   <script>
     var products = []
     var cart = []
+    let currentProduct;
+    let calcNumber = "";
     const cartTable=document.getElementById('cart-table');
+    if(user.userSetting.touchScreen){
+      document.getElementsById('touch-version')
+    }
+    if(user.userSetting.darkMode){
+      document.getElementsById('dark-version')
+    }
+    if(user.userSetting.sideNavMin){
+      document.getElementById('navbarMinimize')
+    }
     const productCategoryMenu = document.querySelector('.product-category-menu');
     for(let cat of categories){
       for(let prod of cat.products){
@@ -480,7 +445,6 @@
     createCategories();
     var barcode = "";
     var interval;
-    console.log(products);
     document.addEventListener('keydown',function(evt) {
       if (interval){
         clearInterval(interval);
@@ -495,6 +459,8 @@
         interval = setInterval(() => barcode = "", 20);
       }
     });
+
+
 
     document.getElementById('search-input').addEventListener('keyup',(e)=>{
       const value = document.getElementById('search-input').value;
@@ -513,6 +479,7 @@
             <span>ksh ${prod.price}</span>
           </div>
         </div>`;
+          prodTemplate.onclick=function(){addProductToCart(prod.id)};
           productCategoryMenu.appendChild(prodTemplate);
         }
       }
@@ -535,7 +502,6 @@
         categoryTemplate.innerHTML =`<div class="card border rounded-0" onclick="createProductCategory(${cat.id})" style="aspect-ratio: 1/1;"><div style="height:100%;display: inline-flex;align-items: center;justify-content: center;"><h5 class="font-weight-bolder mb-0">${cat.name}</h5></div></div>`;
         productCategoryMenu.appendChild(categoryTemplate);
       }
-
     }
 
     function createProductCategory(catId){
@@ -559,6 +525,7 @@
             <span>ksh ${prod.price}</span>
           </div>
         </div>`;
+        prodTemplate.onclick=function(){addProductToCart(prod.id)};
         productCategoryMenu.appendChild(prodTemplate);
       }
     }
@@ -635,5 +602,75 @@
       cartTable.append(row);
     }
 
+    function addProductToCart(id){
+      const name= document.getElementById('add-prod-name');
+      const quantity= document.getElementById('add-prod-quantity');
+      const price= document.getElementById('add-prod-price');
+      const img= document.getElementById('add-prod-img');
+      let product =null;
+      for(let prod of products){
+        if(prod.id === id){
+          product= prod;
+        }
+      }
+      if(product != null){
+        currentProduct = product;
+        name.innerHTML= product.name;
+        quantity.value = '1';
+        price.innerHTML = `ksh ${product.price}`;
+        img.src=`products-upload/${product.mainImage.name}`;
+      }
+      name.disabled = true;
+      $('#add-product-modal').modal('show');
+    }
+
+    function submitProductToCart(){
+      let myProd = createProd(currentProduct)
+      addProdToCartTemplate(myProd);
+      cart.push(myProd);
+      const total =  addCart();
+      document.getElementById('cart-total').innerHTML=`${total.toFixed(2)}`;
+      $('#add-product-modal').modal('hide');
+    }
+
+    function addCash(){
+
+    }
+    function inputCalKey(number){
+      calcNumber =  calcNumber + number;
+      document.getElementById('cash-payment').innerHTML = calcNumber;
+    }
+
+    function calcBackSpace(){
+      calcNumber = calcNumber.slice(0, -1);
+      document.getElementById('cash-payment').innerHTML = calcNumber;
+    }
+
+    function closeModal(id){
+      $(`#${id}`).modal('hide');
+    }
+
+    function openModal(id){
+      $(`#${id}`).modal('show');
+    }
+
+    function touchMode(){
+      const textInput = document.querySelectorAll("input[type=text]");
+      const textArea = document.getElementsByTagName('textarea');
+      const formdata = new FormData();
+      fetch('/user/touch',{
+        method:'POST',
+        body:formData
+      })
+    }
   </script>
+<script>
+  var win = navigator.platform.indexOf('Win') > -1;
+  if (win && document.querySelector('#sidenav-scrollbar')) {
+    var options = {
+      damping: '0.5'
+    }
+    Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+  }
+</script>
 </html>

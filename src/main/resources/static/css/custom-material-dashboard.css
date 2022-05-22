@@ -1,16 +1,26 @@
 .main-right-bar-container{
     display:flex;
+    justify-content:space-between;
     height:100%;
     padding:20px 0px;
 }
 .category-main-container{
-
+    height: 100%;
+    width:60%;
+    display:flex;
+    justify-content:space-between;
+}
+.category-main-wrapper{
+    width:98%;
 }
 .category-main-separator{
     height:100%;
     width:2px;
     background: #3a416f;
     margin: 0px 10px;
+}
+.category-right-container{
+    width:40%;
 }
 .side-bar-btn-container{
     margin-top:20px;
@@ -24,14 +34,10 @@
     width:40px;
     border-radius: 50%
 }
-.category-main-container{
-    width:60%;
-    min-height:100%;
-}
-.right-bar-container{
-    width:38%;
-    height: 100%;
-}
+/*.right-bar-container{*/
+/*    width:38%;*/
+/*    height: 100%;*/
+/*}*/
 .nav-tabs-grid{
     display: flex;
     flex-direction: column;
@@ -51,18 +57,27 @@
     height: 100%;
     overflow: hidden;
     background: #ffffff;
+    box-sizing: border-box;
+}
+.products-calc-wrapper{
+    margin-top:10px;
+    padding:0 10px;
+    height: 100%;
+    box-sizing: border-box;
+    position:relative;
+    overflow: hidden;
     display: flex;
     flex-direction: column;
-    box-sizing: border-box;
+    justify-content:space-between;
 }
 .product-table{
-    height: 45%;
     box-sizing: border-box;
+    height:50%;
 }
 .calculator-container{
+    height:50%;
     width:100%;
-    padding-top:25px;
-    height:55%;
+    padding-top:10px;
     display:flex;
     flex-direction: column;
     position:absolute;
@@ -76,18 +91,19 @@
 .calculator-wrapper{
     display: flex;
     margin-top: 20px;
+    width:100%;
 }
 .num-input-container{
-    width:48%;
+    width:40%;
     display:grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 2px;
 }
 .cal-num{
-    height:36px;
+    aspect-ratio: 1/0.9;
     border-radius:5px;
     border:solid 1px #f4f4f4;
-    background:#344767;
+    background:rgb(32, 41, 64);
     color:#f6f6f6;
     display: inline-flex;
     align-items: center;
@@ -97,16 +113,18 @@
 }
 .total-paid-bal-container{
     box-sizing: border-box;
-    padding:0 8px;
-    width:48%;
+    width:58%;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    padding: 0 7px;
 }
 .total-paid-container{
     width:100%;
     display:flex;
     justify-content: space-between;
+    padding-left: 7px;
+    padding-right: 7px;
 }
 .sales-btn-group{
     height:90%;
@@ -159,4 +177,20 @@
 }
 .dz-details{
     width:50%;
+}
+.add-product-container{
+    display:flex;
+}
+.add-product-image-container{
+    width:30%;
+}
+.add-product-wrapper{
+    width:70%;
+}
+.img-text{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    background: linear-gradient(195deg,#ec407a,#d81b60);
 }

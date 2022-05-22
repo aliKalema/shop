@@ -21,4 +21,5 @@ public class UserSetting {
     private int id;
     private boolean touchScreen;
     private boolean darkMode;
+    private boolean sideNavMin;
 }

@@ -112,7 +112,7 @@ const Keyboard = {
 
                 case "done":
                     keyElement.classList.add("keyboard__key--wide", "keyboard__key--dark");
-                    keyElement.innerHTML = createIconHTML("check_circle");
+                    keyElement.innerHTML = "exit";
 
                     keyElement.addEventListener("click", () => {
                         this.close();
@@ -159,7 +159,6 @@ const Keyboard = {
     },
 
     open(initialValue, oninput, onclose) {
-        document.getElementById('close-key-board-btn').style.display='block';
         this.properties.value = initialValue || "";
         this.eventHandlers.oninput = oninput;
         this.eventHandlers.onclose = onclose;
@@ -167,7 +166,6 @@ const Keyboard = {
     },
 
     close() {
-        document.getElementById('close-key-board-btn').style.display='none';
         this.properties.value = "";
         this.eventHandlers.oninput = oninput;
         this.eventHandlers.onclose = onclose;
@@ -177,5 +175,4 @@ const Keyboard = {
 
 window.addEventListener("DOMContentLoaded", function () {
     Keyboard.init();
-    document.getElementById('close-key-board-btn').addEventListener("click", function(){Keyboard.close()});
 });

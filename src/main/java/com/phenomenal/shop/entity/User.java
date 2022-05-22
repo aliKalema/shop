@@ -21,6 +21,8 @@ public class User {
     @Column(unique =true,length = 50)
     private String username;
     private String password;
+    private String email;
+    private String phone;
     @Column(columnDefinition = "boolean default true")
     private boolean enabled;
     @OneToMany(cascade= CascadeType.ALL,fetch= FetchType.EAGER)
